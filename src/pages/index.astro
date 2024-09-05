@@ -1,16 +1,42 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+
+import '@fontsource-variable/eb-garamond';
+
+const submitted = Astro.request.method === 'POST'
+if (submitted) {
+    console.log(Astro.request)
+    const data = await Astro.request.formData();
+    console.log(data)
+}
+
 ---
 
+
 <Layout title="Clark's Natural Goods">
-<main>
-    <h1>Clark's Natural Goods</h1>
-    <p>Soap for people with skin.</p>
-    <Card title='Why choose us?' href='#' body="There's a lot of soap out there. Here's why we are the best."/>
-</main>
+    <main class="p-6 md:p-24 min-h-svh relative bg-neutral-200 overflow-hidden">
+        <video id="bgVid" class="absolute top-0 left-0 object-cover min-h-full min-w-full z-0" src="./bgVideo.mp4" autoplay muted loop preload="auto"></video>
+        <div class="relative flex flex-col gap-8 sm:gap-52">
+            <h1 class="text-8xl md:text-9xl font-black">Clark's Natural Goods</h1>
+            {submitted && <p>Submitted!!</p>}
+            <p class="text-neutral-200 text-lg">Soap for people with skin. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id ducimus provident molestiae blanditiis. Deleniti, doloribus. Mollitia harum minima sapiente voluptas eius ratione inventore odio, expedita sint aspernatur magni commodi alias.</p>
+            <form class="flex flex-col gap-8" method='POST' enctype="multipart/form-data">
+                <input type="email" class="mx-auto rounded ring text-center" name="email" placeholder="Enter your email address"/>
+                <button class="p-2 bg-neutral-50 rounded mx-auto px-4">Join Waiting List</button>
+            </form>
+        </div>
+    </main>
+    <section class="min-h-svh">
+        <h2>Soap for people with sensitive skin.</h2>
+    </section>
 </Layout>
 
 <style>
+    body {
+        font-family: 'EB Garamond Variable', serif;
+        color: #2d2d2d;
 
+    }
+    main {
+    }
 </style>
