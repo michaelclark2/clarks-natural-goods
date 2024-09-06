@@ -39,43 +39,113 @@ if (Astro.request.method === "POST") {
       preload="auto"></video>
     <div class="relative flex flex-col gap-12 md:gap-24">
       <h1
-        class="text-7xl md:text-9xl font-bold mx-auto text-center drop-shadow tracking-wide"
+        class="text-7xl sm:text-8xl xl:text-9xl font-bold mx-auto text-center drop-shadow tracking-wide"
       >
         Clark's Natural Goods
       </h1>
-      {submitted && <p class="bg-neutral-50 p-4 w-full">Submitted!!</p>}
       <p class="text-2xl lg:text-4xl font-bold p-2 drop-shadow text-center">
         Soap that feels good.
       </p>
-      <form
-        class="flex flex-col gap-8 w-full relative items-center"
-        method="POST"
-        enctype="multipart/form-data"
-      >
-        <input
-          type="email"
-          class="mx-auto rounded text-center opacity-0 invisible absolute transition p-4 min-w-80 border border-neutral-200"
-          name="email"
-          id="emailInput"
-          placeholder="Enter your email address"
-        />
-        <button
-          class="p-4 bg-neutral-50 border-2 border-neutral-200 rounded mx-auto px-8 transition opacity-100"
-          id="joinBtn"
-        >
-          Join the Wait List
-        </button>
-      </form>
+      {
+        submitted ? (
+          <p class="bg-neutral-50 p-4 rounded mx-auto px-8">
+            Thank you! We will be in touch soon!
+          </p>
+        ) : (
+          <form
+            class="flex flex-col gap-8 w-full relative items-center"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <input
+              type="email"
+              class="mx-auto rounded text-center opacity-0 invisible absolute transition p-4 min-w-80 border border-neutral-200"
+              name="email"
+              id="emailInput"
+              placeholder="Enter your email address"
+            />
+            <button
+              class="p-4 bg-neutral-50 border-2 border-neutral-200 rounded mx-auto px-8 transition opacity-100"
+              id="joinBtn"
+            >
+              Be the first to know!
+            </button>
+          </form>
+        )
+      }
     </div>
   </main>
-  <section class="bg-[#272b22] h-48 text-neutral-200">
-    <p>Good</p>
-    <p>Clean</p>
-    <p>Fun</p>
+  <section
+    class="bg-[#272b22] h-48 text-neutral-200 flex justify-center items-center"
+  >
+    <h2 class="text-4xl lg:text-6xl">Who Are We?</h2>
   </section>
-  <section class="min-h-svh text-4xl">
-    <h2>Soap for people with sensitive skin.</h2>
+  <section
+    class="text-2xl py-24 px-12 lg:px-48 lg:text-4xl min-h-svh flex flex-col justify-evenly items-center gap-8"
+  >
+    <p>
+      At <span class="font-bold">Clark's Natural Goods</span>, we're all about
+      simplicity, transparency, and creating soap that truly nourishes your
+      skin.
+    </p>
+    <p>
+      What started as a personal mission to find relief from eczema has grown
+      into a passion for making gentle, moisturizing soap that works for
+      everyone.
+    </p>
+    <p>
+      After years of perfecting our formula, we've created a soap that's not
+      only safe for sensitive skin but packed with benefits that make every wash
+      a soothing experience for everyone.
+    </p>
   </section>
+  <section
+    class="bg-[#272b22] h-48 text-neutral-200 flex justify-center items-center"
+  >
+    <h2 class="text-4xl lg:text-6xl">Why Choose Us?</h2>
+  </section>
+  <section
+    class="text-2xl lg:text-4xl py-24 px-12 lg:px-48 min-h-svh gap-8 flex-col flex justify-evenly items-center"
+  >
+    <p>
+      <h4 class="font-bold text-3xl lg:text-4xl">Crafted with Transparency</h4>
+      We believe you should know exactly what goes into your skincare. Our simple,
+      holistic recipes are made with ingredients you can trust.
+    </p>
+    <p>
+      <h4 class="font-bold text-3xl lg:text-4xl">
+        Moisture-Packed for Healthy Skin
+      </h4>
+      Whether your skin is dry, oily, or somewhere in between, our soap works to
+      hydrate and restore balance, leaving your skin feeling soft and refreshed.
+    </p>
+    <p>
+      <h4 class="font-bold text-3xl lg:text-4xl">
+        For Sensitive Skin and Beyond
+      </h4>
+      While created with sensitive skin in mind, our soap is for everyone. Enjoy
+      a soothing, calming cleanse that benefits all skin types.
+    </p>
+
+    <p class="font-bold text-3xl lg:text-4xl">
+      Join us in embracing skincare that's gentle, effective, and made with
+      love.
+    </p>
+  </section>
+  <section
+    class="bg-[#272b22] h-48 text-neutral-200 flex flex-col justify-center items-center"
+    id="jumpToTop"
+  >
+    <h2 class="text-4xl lg:text-6xl">Join the Wait List</h2>
+    <button class="text-4xl animate-bounce">&uparrow;</button>
+  </section>
+  <footer class="bg-[#272b22] h-8 text-neutral-200 text-center text-sm">
+    <p>
+      Crafted with 💖 by
+      <a href="https://mclark.dev" target="_blank">Michael Clark</a>
+      &copy; 2024
+    </p>
+  </footer>
 </Layout>
 
 <style>
@@ -89,7 +159,12 @@ if (Astro.request.method === "POST") {
 
 <script>
   const waitlistBtn = document.getElementById("joinBtn")!;
-  const emailInput = document.getElementById("emailInput");
+  const emailInput = document.getElementById("emailInput")!;
+  const jumpToTopBtn = document.getElementById("jumpToTop")!;
+
+  jumpToTopBtn?.addEventListener("click", (e: Event) => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
 
   waitlistBtn.addEventListener("click", (e: Event) => {
     e.preventDefault();
