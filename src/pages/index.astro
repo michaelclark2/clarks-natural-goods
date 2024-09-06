@@ -48,19 +48,19 @@ if (Astro.request.method === "POST") {
         Soap that feels good.
       </p>
       <form
-        class="flex flex-col gap-8 mx-auto"
+        class="flex flex-col gap-8 w-full relative items-center"
         method="POST"
         enctype="multipart/form-data"
       >
         <input
           type="email"
-          class="mx-auto rounded text-center opacity-0 absolute invisible transition p-4"
+          class="mx-auto rounded text-center opacity-0 invisible absolute transition p-4 min-w-80 border border-neutral-200"
           name="email"
           id="emailInput"
           placeholder="Enter your email address"
         />
         <button
-          class="p-4 bg-neutral-50 rounded mx-auto px-8 transition opacity-100 transform"
+          class="p-4 bg-neutral-50 border-2 border-neutral-200 rounded mx-auto px-8 transition opacity-100"
           id="joinBtn"
         >
           Join the Wait List
@@ -93,12 +93,20 @@ if (Astro.request.method === "POST") {
 
   waitlistBtn.addEventListener("click", (e: Event) => {
     e.preventDefault();
-
-    e.target.classList.remove("opacity-100");
+    waitlistBtn.classList.remove("opacity-100");
     emailInput?.classList.remove("opacity-0");
-    e.target.classList.add("invisible");
+    waitlistBtn.classList.add("invisible");
+    emailInput?.classList.add("opacity-100");
     emailInput?.classList.remove("invisible");
-
     emailInput?.focus();
+  });
+
+  emailInput?.addEventListener("blur", (e: Event) => {
+    waitlistBtn.classList.add("opacity-100");
+    waitlistBtn.classList.remove("opacity-0");
+    waitlistBtn.classList.remove("invisible");
+    emailInput?.classList.remove("opacity-100");
+    emailInput?.classList.add("opacity-0");
+    emailInput?.classList.add("invisible");
   });
 </script>
