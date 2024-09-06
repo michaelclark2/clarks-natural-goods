@@ -3,30 +3,41 @@ import Layout from '../layouts/Layout.astro';
 
 import '@fontsource-variable/eb-garamond';
 
-const submitted = Astro.request.method === 'POST'
-if (submitted) {
-    console.log(Astro.request)
-    const data = await Astro.request.formData();
-    console.log(data)
+let submitted = false
+if (Astro.request.method === "POST") {
+    try {
+        const data = await Astro.request.formData();
+        const emailToAdd = data.get('email')
+        if (emailToAdd){
+            const res = await fetch(import.meta.env.KV_REST_API_URL + '/sadd/emails/' + data.get('email'), {headers:{Authorization: 'Bearer ' + import.meta.env.KV_REST_API_TOKEN}})
+            const {result} = await res.json()
+            if (result) {
+                submitted = true
+            }
+
+        }
+    } catch (error) {
+        console.error(error)
+    }
 }
 
 ---
 
 
 <Layout title="Clark's Natural Goods">
-    <main class="p-6 md:p-24 min-h-svh relative bg-neutral-200 overflow-hidden">
-        <video id="bgVid" class="absolute top-0 left-0 object-cover min-h-full min-w-full z-0" src="./bgVideo.mp4" autoplay muted loop preload="auto"></video>
-        <div class="relative flex flex-col gap-8 sm:gap-52">
-            <h1 class="text-8xl md:text-9xl font-black">Clark's Natural Goods</h1>
-            {submitted && <p>Submitted!!</p>}
-            <p class="text-neutral-200 text-lg">Soap for people with skin. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Id ducimus provident molestiae blanditiis. Deleniti, doloribus. Mollitia harum minima sapiente voluptas eius ratione inventore odio, expedita sint aspernatur magni commodi alias.</p>
-            <form class="flex flex-col gap-8" method='POST' enctype="multipart/form-data">
-                <input type="email" class="mx-auto rounded ring text-center" name="email" placeholder="Enter your email address"/>
+    <main class="p-6 md:p-80 min-h-svh relative bg-neutral-200 overflow-hidden">
+        <video id="bgVid" class="absolute top-0 left-0 object-cover min-h-full min-w-full z-0 opacity-75" src="./bgVideo.mp4" autoplay muted loop preload="auto"></video>
+        <div class="relative flex flex-col gap-8 md:gap-24">
+            <h1 class="text-8xl md:text-9xl font-black mx-auto text-center drop-shadow">Clark's Natural Goods</h1>
+            {submitted && <p class="bg-neutral-50 p-4 w-full">Submitted!!</p>}
+            <p class="text-4xl font-bold p-2 drop-shadow text-center">Soap that feels good.</p>
+            <form class="flex flex-col gap-8" method="POST" enctype="multipart/form-data">
+                <input type="email" class="mx-auto rounded text-center" name="email" placeholder="Enter your email address"/>
                 <button class="p-2 bg-neutral-50 rounded mx-auto px-4">Join Waiting List</button>
             </form>
         </div>
     </main>
-    <section class="min-h-svh">
+    <section class="min-h-svh text-4xl ">
         <h2>Soap for people with sensitive skin.</h2>
     </section>
 </Layout>
