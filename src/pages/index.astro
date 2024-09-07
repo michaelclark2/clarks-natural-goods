@@ -166,10 +166,12 @@ if (Astro.request.method === "POST") {
 </style>
 
 <script>
-  const waitlistBtn = document.getElementById("joinBtn")!;
-  const emailInput = document.getElementById("emailInput")!;
-  const emailBtn = document.getElementById("emailBtn")!;
-  const jumpToTopBtn = document.getElementById("jumpToTop")!;
+  const waitlistBtn = document.getElementById("joinBtn")! as HTMLButtonElement;
+  const emailInput = document.getElementById("emailInput")! as HTMLInputElement;
+  const emailBtn = document.getElementById("emailBtn")! as HTMLButtonElement;
+  const jumpToTopBtn = document.getElementById(
+    "jumpToTop"
+  )! as HTMLButtonElement;
 
   jumpToTopBtn?.addEventListener("click", (e: Event) => {
     window.scrollTo({ top: 0, behavior: "smooth" });
