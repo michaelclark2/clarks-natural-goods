@@ -26,9 +26,7 @@ if (Astro.request.method === "POST") {
 ---
 
 <Layout title="Clark's Natural Goods">
-  <main
-    class="p-12 pt-20 md:p-40 lg:p-80 min-h-svh relative bg-neutral-200 overflow-hidden"
-  >
+  <main class="p-12 pt-20 md:p-40 lg:p-80 min-h-svh relative overflow-hidden">
     <video
       id="bgVid"
       class="absolute top-0 left-0 object-cover min-h-full min-w-full opacity-75"
@@ -48,7 +46,7 @@ if (Astro.request.method === "POST") {
       </p>
       {
         submitted ? (
-          <div class="bg-neutral-50 p-4 rounded border border-neutral-200 shadow mx-auto px-8">
+          <div class="bg-amber-50 p-4 rounded border border-amber-200 shadow mx-auto px-8">
             <p class="text-center font-bold text-lg">Thank you!</p>
             We will be in touch soon!
           </div>
@@ -60,7 +58,7 @@ if (Astro.request.method === "POST") {
           >
             <input
               type="email"
-              class="mx-auto rounded text-center opacity-0 invisible absolute transition p-4 min-w-80 border border-neutral-200"
+              class="mx-auto rounded text-center opacity-0 invisible absolute transition p-4 min-w-80 border border-amber-200 bg-amber-50"
               name="email"
               id="emailInput"
               placeholder="Enter your email address"
@@ -68,12 +66,12 @@ if (Astro.request.method === "POST") {
             <button
               id="emailBtn"
               type="submit"
-              class="absolute -bottom-16 invisible p-4 bg-neutral-50 border-2 border-neutral-200 rounded mx-auto px-8"
+              class="absolute -bottom-16 invisible p-4 bg-amber-50 border-2 border-amber-200 rounded mx-auto px-8"
             >
               Send
             </button>
             <button
-              class="p-4 bg-neutral-50 border-2 border-neutral-200 rounded mx-auto px-8 transition opacity-100"
+              class="p-4 bg-amber-50 border-2 border-amber-200 rounded mx-auto px-8 transition opacity-100"
               id="joinBtn"
             >
               Be the first to know!
@@ -84,7 +82,7 @@ if (Astro.request.method === "POST") {
     </div>
   </main>
   <section
-    class="bg-[#272b22] h-48 text-neutral-200 flex justify-center items-center"
+    class="bg-[#272b22] h-48 text-amber-50 flex justify-center items-center"
   >
     <h2 class="text-4xl lg:text-6xl">Who Are We?</h2>
   </section>
@@ -108,7 +106,7 @@ if (Astro.request.method === "POST") {
     </p>
   </section>
   <section
-    class="bg-[#272b22] h-48 text-neutral-200 flex justify-center items-center"
+    class="bg-[#272b22] h-48 text-amber-50 flex justify-center items-center"
   >
     <h2 class="text-4xl lg:text-6xl">Why Choose Us?</h2>
   </section>
@@ -141,13 +139,13 @@ if (Astro.request.method === "POST") {
     </p>
   </section>
   <section
-    class="bg-[#272b22] h-48 text-neutral-200 flex flex-col justify-center items-center"
+    class="bg-[#272b22] h-48 text-amber-50 flex flex-col justify-center items-center"
     id="jumpToTop"
   >
     <h2 class="text-4xl lg:text-6xl">Join the Wait List</h2>
     <button class="text-4xl animate-bounce">&uparrow;</button>
   </section>
-  <footer class="bg-[#272b22] h-8 text-neutral-200 text-center text-sm">
+  <footer class="bg-[#272b22] h-8 text-amber-50 text-center text-sm">
     <p>
       Crafted with 💖 by
       <a href="https://mclark.dev" target="_blank">Michael Clark</a>
