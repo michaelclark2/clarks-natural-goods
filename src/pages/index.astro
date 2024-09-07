@@ -65,6 +65,13 @@ if (Astro.request.method === "POST") {
               placeholder="Enter your email address"
             />
             <button
+              id="emailBtn"
+              type="submit"
+              class="absolute -bottom-16 invisible p-4 bg-neutral-50 border-2 border-neutral-200 rounded mx-auto px-8"
+            >
+              Send
+            </button>
+            <button
               class="p-4 bg-neutral-50 border-2 border-neutral-200 rounded mx-auto px-8 transition opacity-100"
               id="joinBtn"
             >
@@ -81,7 +88,7 @@ if (Astro.request.method === "POST") {
     <h2 class="text-4xl lg:text-6xl">Who Are We?</h2>
   </section>
   <section
-    class="text-2xl py-24 px-12 lg:px-48 lg:text-4xl min-h-svh flex flex-col justify-evenly items-center gap-8"
+    class="text-2xl py-24 px-12 lg:px-48 xl:px-0 xl:w-[50%] mx-auto lg:text-4xl min-h-svh flex flex-col justify-evenly items-center gap-8"
   >
     <p>
       At <span class="font-bold">Clark's Natural Goods</span>, we're all about
@@ -105,7 +112,7 @@ if (Astro.request.method === "POST") {
     <h2 class="text-4xl lg:text-6xl">Why Choose Us?</h2>
   </section>
   <section
-    class="text-2xl lg:text-4xl py-24 px-12 lg:px-48 min-h-svh gap-8 flex-col flex justify-evenly items-center"
+    class="text-2xl lg:text-4xl py-24 px-12 lg:px-48 xl:px-0 xl:w-[50%] mx-auto min-h-svh gap-8 flex-col flex justify-evenly items-center"
   >
     <p>
       <h4 class="font-bold text-3xl lg:text-4xl">Crafted with Transparency</h4>
@@ -160,6 +167,7 @@ if (Astro.request.method === "POST") {
 <script>
   const waitlistBtn = document.getElementById("joinBtn")!;
   const emailInput = document.getElementById("emailInput")!;
+  const emailBtn = document.getElementById("emailBtn")!;
   const jumpToTopBtn = document.getElementById("jumpToTop")!;
 
   jumpToTopBtn?.addEventListener("click", (e: Event) => {
@@ -169,19 +177,15 @@ if (Astro.request.method === "POST") {
   waitlistBtn.addEventListener("click", (e: Event) => {
     e.preventDefault();
     waitlistBtn.classList.remove("opacity-100");
-    emailInput?.classList.remove("opacity-0");
+    emailInput.classList.remove("opacity-0");
     waitlistBtn.classList.add("invisible");
-    emailInput?.classList.add("opacity-100");
-    emailInput?.classList.remove("invisible");
-    emailInput?.focus();
+    emailInput.classList.add("opacity-100");
+    emailInput.classList.remove("invisible");
+    emailBtn.classList.remove("invisible");
+    emailInput.focus();
   });
 
-  emailInput?.addEventListener("blur", (e: Event) => {
-    waitlistBtn.classList.add("opacity-100");
-    waitlistBtn.classList.remove("opacity-0");
-    waitlistBtn.classList.remove("invisible");
-    emailInput?.classList.remove("opacity-100");
-    emailInput?.classList.add("opacity-0");
-    emailInput?.classList.add("invisible");
+  emailBtn.addEventListener("click", (e: Event) => {
+    if (emailInput.value === "") e.preventDefault();
   });
 </script>
