@@ -48,9 +48,10 @@ if (Astro.request.method === "POST") {
       </p>
       {
         submitted ? (
-          <p class="bg-neutral-50 p-4 rounded mx-auto px-8">
-            Thank you! We will be in touch soon!
-          </p>
+          <div class="bg-neutral-50 p-4 rounded border border-neutral-200 shadow mx-auto px-8">
+            <p class="text-center font-bold text-lg">Thank you!</p>
+            We will be in touch soon!
+          </div>
         ) : (
           <form
             class="flex flex-col gap-8 w-full relative items-center"
