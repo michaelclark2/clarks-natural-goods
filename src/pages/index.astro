@@ -254,7 +254,7 @@ if (Astro.request.method === "POST") {
     "jumpToTop"
   )! as HTMLButtonElement;
 
-  jumpToTopBtn?.addEventListener("click", (e: Event) => {
+  jumpToTopBtn?.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
