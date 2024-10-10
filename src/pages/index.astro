@@ -1,7 +1,11 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 
 import "@fontsource/della-respira";
+
+import soapImage from "../assets/images/products/soap1.jpg";
+import soapImage2 from "../assets/images/products/soap2.jpg";
 
 let submitted = false;
 if (Astro.request.method === "POST") {
@@ -117,6 +121,11 @@ if (Astro.request.method === "POST") {
   <section
     class="text-2xl lg:text-4xl py-24 px-12 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto min-h-svh gap-8 flex-col flex justify-evenly items-start"
   >
+    <Image
+      class:list="aspect-square sm:aspect-auto object-cover"
+      src={soapImage}
+      alt="Handmade soap resting on a log surrounded by wildflowers"
+    />
     <p>Our cold process soap uses these natural ingredients:</p>
     <ul class="list-disc pl-5 text-base md:text-xl">
       <li>
@@ -194,6 +203,11 @@ if (Astro.request.method === "POST") {
   <section
     class="text-2xl lg:text-4xl py-24 px-12 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto min-h-svh gap-8 flex-col flex justify-evenly items-center"
   >
+    <Image
+      class:list="aspect-square sm:aspect-auto object-cover"
+      src={soapImage2}
+      alt="Handmade soap resting on a field of grass"
+    />
     <p>
       <h3 class="font-bold text-3xl lg:text-4xl">Crafted with Transparency</h3>
       We believe you should know exactly what goes into your skincare. Our simple,
