@@ -210,42 +210,46 @@ if (Astro.request.method === "POST") {
     <h2 class="text-4xl lg:text-6xl text-center">Join our Mailing List</h2>
   </section>
   <section
-    class="bg-[#272b22] w-full text-amber-50 text-2xl lg:text-4xl pb-12 px-12 lg:px-48 xl:px-0 xl:w-[50%] gap-8 flex-col flex justify-between items-center"
+    class="bg-[#272b22] text-amber-50 text-2xl lg:text-4xl pb-12 px-12 lg:px-48 xl:px-0 w-full flex-col flex justify-between items-center"
   >
-    {
-      submitted ? (
-        <div class="text-[#272b22] text-base bg-amber-50 p-4 rounded border border-amber-200 shadow mx-auto px-8">
-          <p class="text-center font-bold text-lg ">Thank you!</p>
-          We will be in touch soon!
-        </div>
-      ) : (
-        <form
-          class="flex w-full justify-center items-center"
-          method="POST"
-          enctype="multipart/form-data"
-        >
-          <input
-            type="email"
-            class="rounded text-center p-4 min-w-80 border border-amber-200 bg-amber-50 text-[#272b22]"
-            name="email"
-            id="emailInput"
-            placeholder="Email address"
-          />
-          <button
-            id="emailBtn"
-            type="submit"
-            class="p-4 font-bold border-2 border-amber-200 rounded px-8 ml-4 transition hover:scale-105"
+    <div
+      class="xl:w-[50%] mx-auto flex flex-col justify-between items-center gap-8"
+    >
+      {
+        submitted ? (
+          <div class="text-[#272b22] text-base bg-amber-50 p-4 rounded border border-amber-200 shadow mx-auto px-8">
+            <p class="text-center font-bold text-lg ">Thank you!</p>
+            We will be in touch soon!
+          </div>
+        ) : (
+          <form
+            class="flex w-full justify-center items-center"
+            method="POST"
+            enctype="multipart/form-data"
           >
-            &rightarrow;
-          </button>
-        </form>
-      )
-    }
-    <p>
-      Be the first to know when have new offers to keep your skin healthy and
-      clean by joining our mailing list today! We have a lot planned for the
-      future and we don't want you to miss it!
-    </p>
+            <input
+              type="email"
+              class="rounded text-center p-4 min-w-80 border border-amber-200 bg-amber-50 text-[#272b22]"
+              name="email"
+              id="emailInput"
+              placeholder="Email address"
+            />
+            <button
+              id="emailBtn"
+              type="submit"
+              class="p-4 font-bold border-2 border-amber-200 rounded px-8 ml-4 transition hover:scale-105"
+            >
+              &rightarrow;
+            </button>
+          </form>
+        )
+      }
+      <p class="p-4">
+        Be the first to know when have new offers to keep your skin healthy and
+        clean by joining our mailing list today! We have a lot planned for the
+        future and we don't want you to miss it!
+      </p>
+    </div>
   </section>
   <footer class="bg-[#272b22] py-4 text-amber-50 text-center text-sm">
     <p>
