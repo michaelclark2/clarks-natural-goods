@@ -1,0 +1,12 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+if (Astro.request.method === "POST") {
+  const data = await Astro.request.json();
+  console.log(data);
+}
+---
+
+<Layout title="webhook">
+  <div><h2>webhook</h2></div>
+</Layout>
