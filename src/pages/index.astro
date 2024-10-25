@@ -2,25 +2,57 @@
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 
+import { createStorefrontApiClient } from "@shopify/storefront-api-client";
 import "@fontsource/della-respira";
 
 import soapImage from "../assets/images/products/soap1.jpg";
 import soapImage2 from "../assets/images/products/soap2.jpg";
 
 let submitted = false;
+
+const shopify = createStorefrontApiClient({
+  storeDomain: "https://shop.clarksnaturalgoods.com",
+  apiVersion: "2024-10",
+  publicAccessToken: "4fd761a2fa1fc83cbc8a45c930c18a75",
+});
+
+const createCustomerMutation = `
+mutation createCustomer($input: CustomerCreateInput!) {
+  customerCreate(input: $input) {
+    customer {
+      email
+      acceptsMarketing
+    }
+  }
+}
+`;
+
 if (Astro.request.method === "POST") {
   try {
     const data = await Astro.request.formData();
     const emailToAdd = data.get("email");
     if (emailToAdd) {
-      await fetch(
-        import.meta.env.KV_REST_API_URL + "/sadd/emails/" + data.get("email"),
+      const { result } = await fetch(
+        import.meta.env.KV_REST_API_URL + "/sadd/emails/" + emailToAdd,
         {
           headers: {
             Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
           },
         }
-      );
+      ).then((r) => r.json());
+      if (result === 1) {
+        const { data, errors } = await shopify.request(createCustomerMutation, {
+          variables: {
+            input: {
+              email: emailToAdd,
+              password: "password",
+              acceptsMarketing: true,
+            },
+          },
+        });
+        console.log(data, errors);
+      }
+
       submitted = true;
     }
   } catch (error) {
