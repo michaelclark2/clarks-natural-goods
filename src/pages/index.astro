@@ -235,6 +235,12 @@ if (Astro.request.method === "POST") {
       Join us in embracing skincare that's gentle, effective, and made with
       love.
     </p>
+    <a
+      href="https://shop.clarksnaturalgoods.com/products/body-soap"
+      class="p-4 bg-[#51910A] text-amber-50 border-2 border-emerald-700 rounded mx-auto px-8 transition hover:scale-105"
+    >
+      Shop Natural Skincare
+    </a>
   </section>
   <section
     class="bg-[#272b22] h-48 text-amber-50 flex justify-center items-center px-4"
@@ -249,19 +255,19 @@ if (Astro.request.method === "POST") {
     >
       {
         submitted ? (
-          <div class="text-[#272b22] text-base bg-amber-50 p-4 rounded border border-amber-200 shadow mx-auto px-8">
-            <p class="text-center font-bold text-lg ">Thank you!</p>
+          <div class="text-[#272b22] text-base lg:text-2xl bg-amber-50 rounded border border-amber-200 shadow mx-auto p-12">
+            <p class="text-center font-bold text-2xl lg:text-4xl">Thank you!</p>
             We will be in touch soon!
           </div>
         ) : (
           <form
-            class="flex w-full justify-center items-center flex-wrap"
+            class="flex w-full justify-center items-center flex-col gap-4"
             method="POST"
             enctype="multipart/form-data"
           >
             <input
               type="email"
-              class="rounded text-center p-2 border border-amber-200 bg-amber-50 text-[#272b22]"
+              class="rounded text-center w-full sm:w-1/2 p-2 border border-amber-200 bg-amber-50 text-[#272b22]"
               name="email"
               id="emailInput"
               placeholder="Email address"
@@ -269,14 +275,14 @@ if (Astro.request.method === "POST") {
             <button
               id="emailBtn"
               type="submit"
-              class="p-4 font-bold border-2 border-amber-200 rounded px-4 sm:ml-4 transition hover:scale-105 leading-3 text-center"
+              class="w-full sm:w-1/2 p-4 border-2 border-amber-200 rounded px-8 transition hover:scale-105 leading-3 text-center text-2xl"
             >
-              &rightarrow;
+              Join Today!
             </button>
           </form>
         )
       }
-      <p class="p-4">
+      <p class="py-4">
         Be the first to know when have new offers to keep your skin healthy and
         clean by joining our mailing list today! We have a lot planned for the
         future and we don't want you to miss it!
@@ -302,7 +308,6 @@ if (Astro.request.method === "POST") {
 </style>
 
 <script>
-  const waitlistBtn = document.getElementById("joinBtn")! as HTMLButtonElement;
   const emailInput = document.getElementById("emailInput")! as HTMLInputElement;
   const emailBtn = document.getElementById("emailBtn")! as HTMLButtonElement;
   const jumpToTopBtn = document.getElementById(
@@ -311,17 +316,6 @@ if (Astro.request.method === "POST") {
 
   jumpToTopBtn?.addEventListener("click", () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  waitlistBtn.addEventListener("click", (e: Event) => {
-    e.preventDefault();
-    waitlistBtn.classList.remove("opacity-100");
-    emailInput.classList.remove("opacity-0");
-    waitlistBtn.classList.add("invisible");
-    emailInput.classList.add("opacity-100");
-    emailInput.classList.remove("invisible");
-    emailBtn.classList.remove("invisible");
-    emailInput.focus();
   });
 
   emailBtn.addEventListener("click", (e: Event) => {
