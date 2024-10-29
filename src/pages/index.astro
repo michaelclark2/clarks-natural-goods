@@ -7,6 +7,7 @@ import "@fontsource/della-respira";
 
 import soapImage from "../assets/images/products/soap1.jpg";
 import soapImage2 from "../assets/images/products/soap2.jpg";
+import logo from "../assets/images/brand/logo words.svg";
 
 let submitted = false;
 
@@ -62,7 +63,7 @@ if (Astro.request.method === "POST") {
 ---
 
 <Layout title="Clark's Natural Goods">
-  <main class="p-12 pt-20 md:p-40 lg:p-80 min-h-svh relative overflow-hidden">
+  <main class="p-12 pt-40 md:p-40 lg:p-40 min-h-svh relative overflow-hidden">
     <video
       id="bgVid"
       class="absolute top-0 left-0 object-cover min-h-full min-w-full opacity-75"
@@ -71,12 +72,12 @@ if (Astro.request.method === "POST") {
       muted
       loop
       preload="auto"></video>
-    <div class="relative flex flex-col gap-12 md:gap-24">
-      <h1
-        class="text-7xl sm:text-8xl xl:text-9xl font-bold mx-auto text-center drop-shadow tracking-wide"
-      >
-        Clark's Natural Goods
-      </h1>
+    <div class="relative flex flex-col gap-24 md:gap-24">
+      <Image
+        src={logo}
+        alt="Clark's Natural Goods"
+        class:list={"text-center mx-auto drop-shadow"}
+      />
       <p class="text-2xl lg:text-4xl font-bold p-2 drop-shadow text-center">
         Soap that feels good.
       </p>
