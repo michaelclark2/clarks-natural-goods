@@ -262,6 +262,11 @@ if (Astro.request.method === "POST") {
             We will be in touch soon!
           </div>
         ) : (
+        <p class="py-4">
+          Sign up for our newsletter and be the first to know about new products,
+          special offers, and tips for natural skincare. We have a lot planned for
+          the future and we don't want you to miss it!
+        </p>
           <form
             class="flex w-full justify-center items-center flex-col gap-4"
             method="POST"
@@ -272,23 +277,20 @@ if (Astro.request.method === "POST") {
               class="rounded text-center w-full sm:w-1/2 p-2 border border-amber-200 bg-amber-50 text-[#272b22]"
               name="email"
               id="emailInput"
-              placeholder="Email address"
+              required
+              placeholder="Enter your email"
             />
             <button
               id="emailBtn"
               type="submit"
               class="w-full sm:w-1/2 p-4 border-2 border-amber-200 rounded px-8 transition hover:scale-105 leading-3 text-center text-2xl"
             >
-              Join Today!
+              Subscribe
             </button>
           </form>
+
         )
       }
-      <p class="py-4">
-        Be the first to know when have new offers to keep your skin healthy and
-        clean by joining our mailing list today! We have a lot planned for the
-        future and we don't want you to miss it!
-      </p>
     </div>
   </section>
   <footer class="bg-[#272b22] py-4 text-amber-50 text-center text-sm">
