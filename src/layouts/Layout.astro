@@ -9,6 +9,19 @@ const { title } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
+    <script
+      type="text/partytown"
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-H9GW4Q9EQV"></script>
+    <script type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-H9GW4Q9EQV");
+    </script>
     <meta charset="UTF-8" />
     <meta
       name="description"
@@ -47,22 +60,8 @@ const { title } = Astro.props;
     <meta name="twitter:image" content="/ogImage.png" />
 
     <title>{title}</title>
-    <script
-      type="text/partytown"
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-H9GW4Q9EQV"
-    ></script></head
-  >
+  </head>
 
-  <script type="text/partytown">
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
-
-    gtag("config", "G-H9GW4Q9EQV");
-  </script>
   <body class="bg-amber-50">
     <slot />
   </body>
