@@ -7,6 +7,7 @@ import partytown from "@astrojs/partytown";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://clarksnaturalgoods.com",
   integrations: [tailwind(), partytown()],
   output: "server",
   adapter: vercel({ webAnalytics: { enabled: true } }),
