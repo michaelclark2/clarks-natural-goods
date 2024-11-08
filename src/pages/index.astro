@@ -63,7 +63,7 @@ if (Astro.request.method === "POST") {
 ---
 
 <Layout title="Clark's Natural Goods">
-  <main class="p-12 pt-40 md:p-40 lg:p-40 min-h-svh relative overflow-hidden">
+  <main class="p-10 pt-40 md:p-40 lg:p-40 min-h-svh relative overflow-hidden">
     <video
       id="bgVid"
       class="absolute top-0 left-0 object-cover min-h-full min-w-full opacity-75"
@@ -78,7 +78,7 @@ if (Astro.request.method === "POST") {
         alt="Clark's Natural Goods Logo"
         class:list={"text-center mx-auto drop-shadow"}
       />
-      <p class="text-2xl lg:text-4xl font-bold p-2 drop-shadow text-center">
+      <p class="text-2xl lg:text-4xl font-bold sm:p-2 drop-shadow text-center">
         Made for the greater good.
       </p>
       <a
@@ -97,7 +97,7 @@ if (Astro.request.method === "POST") {
     </h1>
   </section>
   <section
-    class="text-2xl py-24 px-12 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto lg:text-4xl min-h-svh flex flex-col justify-evenly items-center gap-8"
+    class="text-2xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto lg:text-4xl min-h-svh flex flex-col justify-evenly items-center gap-8"
   >
     <p>
       At <span class="font-bold">Clark's Natural Goods</span> we're dedicated to
@@ -124,14 +124,22 @@ if (Astro.request.method === "POST") {
     </h2>
   </section>
   <section
-    class="text-2xl lg:text-4xl py-24 px-12 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto min-h-svh gap-8 flex-col flex justify-evenly items-start"
+    class="text-2xl lg:text-4xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto min-h-svh gap-8 flex-col flex justify-evenly items-start"
   >
     <Image
       class:list="aspect-square sm:aspect-auto object-cover"
       src={soapImage}
       alt="Handmade soap resting on a log surrounded by wildflowers"
     />
-    <p>Our cold process soap uses these natural ingredients:</p>
+    <p>
+      Our soaps are thoughtfully crafted with pure, natural ingredients chosen
+      for their nourishing qualities and skin-loving benefits.
+    </p>
+    <p>
+      Each bar is made with organic oils and botanicals to gently cleanse,
+      hydrate, and protect, leaving your skin feeling balanced and refreshed —
+      without any unnecessary additives.
+    </p>
     <ul class="list-disc pl-5 text-base md:text-xl">
       <li>
         <h3 class="font-bold text-2xl">Coconut Oil</h3>
@@ -206,7 +214,7 @@ if (Astro.request.method === "POST") {
     </h2>
   </section>
   <section
-    class="text-2xl lg:text-4xl py-24 px-12 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto min-h-svh gap-8 flex-col flex justify-evenly items-center"
+    class="text-2xl lg:text-4xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto min-h-svh gap-8 flex-col flex justify-evenly items-center"
   >
     <Image
       class:list="aspect-square sm:aspect-auto object-cover"
@@ -239,7 +247,7 @@ if (Astro.request.method === "POST") {
     </p>
     <a
       href="https://shop.clarksnaturalgoods.com/products/body-soap"
-      class="p-4 bg-[#51910A] text-amber-50 border-2 border-emerald-700 rounded mx-auto px-8 transition hover:scale-105"
+      class="p-4 bg-[#51910A] text-amber-50 border-2 border-emerald-700 rounded mx-auto px-8 transition hover:scale-105 text-xl"
     >
       Shop Natural Skincare
     </a>
@@ -250,7 +258,7 @@ if (Astro.request.method === "POST") {
     <h2 class="text-4xl lg:text-6xl text-center">Want to know more?</h2>
   </section>
   <section
-    class="bg-[#272b22] text-amber-50 text-2xl lg:text-4xl pb-12 px-12 lg:px-48 xl:px-0 w-full flex-col flex justify-between items-center"
+    class="bg-[#272b22] text-amber-50 text-2xl lg:text-4xl pb-12 px-10 lg:px-48 xl:px-0 w-full flex-col flex justify-between items-center"
   >
     <div
       class="xl:w-[50%] mx-auto flex flex-col justify-between items-center gap-8"
