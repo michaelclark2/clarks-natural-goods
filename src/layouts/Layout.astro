@@ -9,13 +9,30 @@ const { title } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
+    <script
+      type="text/partytown"
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-H9GW4Q9EQV"></script>
+    <script type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-H9GW4Q9EQV");
+    </script>
     <meta charset="UTF-8" />
     <meta
       name="description"
-      content="Discover handcrafted, moisturizing soap from Clark's Natural Goods. Made with simple, holistic ingredients for sensitive skin and all skin types."
+      content="Discover handcrafted soap from Clark's Natural Goods. Made with simple, holistic ingredients for sensitive skin and all skin types."
     />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
+    <link
+      rel="canonical"
+      href={"https://clarksnaturalgoods.com" + Astro.url.pathname}
+    />
     <link rel="icon" type="image/svg+xml" href="/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -31,7 +48,7 @@ const { title } = Astro.props;
     <meta property="og:title" content="Clark's Natural Goods" />
     <meta
       property="og:description"
-      content="Discover handcrafted, moisturizing soap from Clark's Natural Goods. Made with simple, holistic ingredients for sensitive skin and all skin types."
+      content="Discover handcrafted soap from Clark's Natural Goods. Made with simple, holistic ingredients for sensitive skin and all skin types."
     />
     <meta property="og:image" content="/ogImage.png" />
 
@@ -42,12 +59,13 @@ const { title } = Astro.props;
     <meta name="twitter:title" content="Clark's Natural Goods" />
     <meta
       name="twitter:description"
-      content="Discover handcrafted, moisturizing soap from Clark's Natural Goods. Made with simple, holistic ingredients for sensitive skin and all skin types."
+      content="Discover handcrafted soap from Clark's Natural Goods. Made with simple, holistic ingredients for sensitive skin and all skin types."
     />
     <meta name="twitter:image" content="/ogImage.png" />
 
     <title>{title}</title>
   </head>
+
   <body class="bg-amber-50">
     <slot />
   </body>
