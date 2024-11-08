@@ -262,33 +262,34 @@ if (Astro.request.method === "POST") {
             Thank you for subscribing!
           </div>
         ) : (
-        <p class="py-4">
-          Sign up for our newsletter and be the first to know about new products,
-          special offers, and tips for natural skincare. We have a lot planned for
-          the future and we don't want you to miss it!
-        </p>
-          <form
-            class="flex w-full justify-center items-center flex-col gap-4"
-            method="POST"
-            enctype="multipart/form-data"
-          >
-            <input
-              type="email"
-              class="rounded text-center w-full sm:w-1/2 p-2 border border-amber-200 bg-amber-50 text-[#272b22]"
-              name="email"
-              id="emailInput"
-              required
-              placeholder="Enter your email"
-            />
-            <button
-              id="emailBtn"
-              type="submit"
-              class="w-full sm:w-1/2 p-4 border-2 border-amber-200 rounded px-8 transition hover:scale-105 leading-3 text-center text-2xl"
+          <>
+            <p class="py-4">
+              Sign up for our newsletter and be the first to know about new
+              products, special offers, and tips for natural skincare. We have a
+              lot planned for the future and we don't want you to miss it!
+            </p>
+            <form
+              class="flex w-full justify-center items-center flex-col gap-4"
+              method="POST"
+              enctype="multipart/form-data"
             >
-              Subscribe
-            </button>
-          </form>
-
+              <input
+                type="email"
+                class="rounded text-center w-full sm:w-1/2 p-2 border border-amber-200 bg-amber-50 text-[#272b22]"
+                name="email"
+                id="emailInput"
+                required
+                placeholder="Enter your email"
+              />
+              <button
+                id="emailBtn"
+                type="submit"
+                class="w-full sm:w-1/2 p-4 border-2 border-amber-200 rounded px-8 transition hover:scale-105 leading-3 text-center text-2xl"
+              >
+                Subscribe
+              </button>
+            </form>
+          </>
         )
       }
     </div>
