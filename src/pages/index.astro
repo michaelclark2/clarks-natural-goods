@@ -8,6 +8,7 @@ import "@fontsource/della-respira";
 import soapImage from "../assets/images/products/soap1.jpg";
 import soapImage2 from "../assets/images/products/soap2.jpg";
 import logo from "../assets/images/brand/logo words.svg";
+import Card from "../components/Card.astro";
 
 let submitted = false;
 
@@ -140,90 +141,50 @@ if (Astro.request.method === "POST") {
       hydrate, and protect, leaving your skin feeling balanced and refreshed —
       without any unnecessary additives.
     </p>
-    <div class="flex flex-wrap gap-2 text-base md:text-xl">
-      <div class="rounded border border-[#272b22] p-4 w-full mx-auto">
-        <div class="mb-4">
-          <h3 class="font-bold text-3xl">Coconut</h3>
-          <small>Cocos nucifera</small>
-        </div>
-        <p>
-          Cleanses deeply while keeping skin hydrated and soft, adding a natural
-          foaminess to the soap.
-        </p>
-      </div>
-      <div class="rounded border border-[#272b22] p-4 w-full mx-auto">
-        <div class="mb-4">
-          <h3 class="font-bold text-3xl">Palm</h3>
-          <small>Elaeis guineensis</small>
-        </div>
-        <p>
-          Creates a hard, long-lasting bar and provides a creamy lather that
-          leaves skin feeling smooth.
-        </p>
-      </div>
-      <div class="rounded border border-[#272b22] p-4 w-full mx-auto">
-        <div class="mb-4">
-          <h3 class="font-bold text-3xl">Olive</h3>
-          <small>Olea europaea</small>
-        </div>
-        <p>
-          Soothes and moisturizes sensitive skin, while adding a gentle
-          cleansing effect without stripping oils.
-        </p>
-      </div>
-      <div class="rounded border border-[#272b22] p-4 w-full mx-auto">
-        <div class="mb-4">
-          <h3 class="font-bold text-3xl">Avocado</h3>
-          <small>Persea americana</small>
-        </div>
-        <p>
-          Nourishes the skin with vitamins and offers deep hydration for a
-          smooth and radiant feel.
-        </p>
-      </div>
-      <div class="rounded border border-[#272b22] p-4 w-full mx-auto">
-        <div class="mb-4">
-          <h3 class="font-bold text-3xl">Castor</h3>
-          <small>Ricinus communis</small>
-        </div>
-        <p>
-          Enhances lather, giving the soap a rich, creamy texture while keeping
-          skin moisturized.
-        </p>
-      </div>
+    <div class="flex flex-wrap gap-4 text-base md:text-xl">
+      <Card
+        title="Coconut"
+        subtitle="Cocos nucifera"
+        body="Cleanses deeply while keeping skin hydrated and soft, adding a natural foaminess to the soap."
+      />
+      <Card
+        title="Palm"
+        subtitle="Elaeis guineensis"
+        body="Creates a hard, long-lasting bar and provides a creamy lather that leaves skin feeling smooth."
+      />
+      <Card
+        title="Olive"
+        subtitle="Olea europaea"
+        body="Soothes and moisturizes sensitive skin, while adding a gentle cleansing effect without stripping oils."
+      />
+      <Card
+        title="Avocado"
+        subtitle="Persea americana"
+        body="Nourishes the skin with vitamins and offers deep hydration for a smooth and radiant feel."
+      />
+      <Card
+        title="Castor"
+        subtitle="Ricinus communis"
+        body="Enhances lather, giving the soap a rich, creamy texture while keeping skin moisturized."
+      />
     </div>
     <p class="mt-8">Scented with these therapeutic essential oils:</p>
     <div class="flex flex-wrap gap-4 text-base md:text-xl">
-      <div class="rounded border border-[#272b22] p-4 w-full mx-auto">
-        <div class="mb-4">
-          <h3 class="font-bold text-3xl">Tea Tree</h3>
-          <small>Melaleuca alternifolia</small>
-        </div>
-        <p>
-          Known for its natural cleansing properties, tea tree oil helps to
-          purify and refresh the skin.
-        </p>
-      </div>
-      <div class="rounded border border-[#272b22] p-4 w-full mx-auto">
-        <div class="mb-4">
-          <h3 class="font-bold text-3xl">Clove Bud</h3>
-          <small>Syzygium aromaticum</small>
-        </div>
-        <p>
-          Adds a warm, spicy scent while providing a soothing effect on the
-          skin.
-        </p>
-      </div>
-      <div class="rounded border border-[#272b22] p-4 w-full mx-auto">
-        <div class="mb-4">
-          <h3 class="font-bold text-3xl">Lavender</h3>
-          <small>Lavandula officinalis</small>
-        </div>
-        <p>
-          Calms and relaxes the skin, promoting a soothing cleanse with a
-          pleasant floral fragrance.
-        </p>
-      </div>
+      <Card
+        title="Tea Tree"
+        subtitle="Melaleuca alternifolia"
+        body="Known for its natural cleansing properties, tea tree oil helps to purify and refresh the skin."
+      />
+      <Card
+        title="Clove Bud"
+        subtitle="Syzygium aromaticum"
+        body="Adds a warm, spicy scent while providing a soothing effect on the skin."
+      />
+      <Card
+        title="Lavender"
+        subtitle="Lavandula angustifolia"
+        body="Calms and relaxes the skin, promoting a soothing cleanse with a pleasant floral fragrance."
+      />
     </div>
   </section>
   <section
