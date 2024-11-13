@@ -1,7 +1,7 @@
 ---
 import { createStorefrontApiClient } from "@shopify/storefront-api-client";
 import Layout from "../../../layouts/Layout.astro";
-import logo from "../../../assets/images/brand/logo words.svg";
+
 const shopify = createStorefrontApiClient({
   storeDomain: "https://shop.clarksnaturalgoods.com",
   apiVersion: "2024-10",
@@ -18,19 +18,28 @@ const createCustomerMutation = `
     }
   }
   `;
-// const { data, errors } = await shopify.request(createCustomerMutation, {
-//   variables: {
-//     input: {
-//       email: emailToAdd,
-//       password: "password",
-//       acceptsMarketing: true,
-//     },
-//   },
-// });
-// console.log(data, errors);
 const { id } = Astro.params;
 
 const emailDecoded = atob(decodeURI(id!));
+
+const deleteEmailResponse: { result: number } = await fetch(
+  import.meta.env.KV_REST_API_URL + "/hdel/" + decodeURI(id!) + "/email",
+  { headers: { Authorization: `Bearer ${import.meta.env.KV_REST_API_TOKEN}` } }
+).then((r) => r.json());
+const shouldAddEmailToShopify = deleteEmailResponse.result === 1;
+
+if (shouldAddEmailToShopify) {
+  const { data, errors } = await shopify.request(createCustomerMutation, {
+    variables: {
+      input: {
+        email: emailDecoded,
+        password: "password",
+        acceptsMarketing: true,
+      },
+    },
+  });
+  console.log(data, errors);
+}
 ---
 
 <Layout title="Clark's Natural Goods | Thank You for Confirming Your Email">
