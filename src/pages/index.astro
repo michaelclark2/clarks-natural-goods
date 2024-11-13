@@ -189,55 +189,46 @@ let submitted = false;
     <div
       class="xl:w-[50%] mx-auto flex flex-col justify-between items-center gap-8"
     >
-      {
-        submitted ? (
-          <div class="text-[#272b22] text-base lg:text-2xl bg-amber-50 rounded border border-amber-200 shadow mx-auto p-12">
-            <p class="text-center font-bold text-2xl lg:text-4xl">Thank you!</p>
-            Thank you for subscribing!
-          </div>
-        ) : (
-          <>
-            <p class="py-4">
-              Sign up for our newsletter and be the first to know about new
-              products, special offers, and tips for natural skincare. We have a
-              lot planned for the future and we don't want you to miss it!
-            </p>
-            <form
-              class="flex w-full justify-center items-center flex-col gap-4"
-              method="POST"
-              enctype="multipart/form-data"
-              action="/email/send"
-            >
-              <input
-                type="email"
-                class="rounded text-center w-full sm:w-1/2 p-2 border border-amber-200 bg-amber-50 text-[#272b22]"
-                name="email"
-                id="emailInput"
-                required
-                placeholder="Enter your email"
-              />
-              <button
-                id="emailBtn"
-                type="submit"
-                class="w-full sm:w-1/2 p-4 border-2 border-amber-200 rounded px-8 transition hover:scale-105 leading-3 text-center text-2xl"
-              >
-                Subscribe
-              </button>
-            </form>
-          </>
-        )
-      }
+      <div
+        id="thankYou"
+        class="text-[#272b22] text-base lg:text-2xl bg-amber-50 rounded border border-amber-200 shadow mx-auto p-12"
+      >
+        <p class="text-center font-bold text-2xl lg:text-4xl">Thank you!</p>
+        Thank you for subscribing!
+      </div>
+
+      <div id="emailForm">
+        <p class="py-4">
+          Sign up for our newsletter and be the first to know about new
+          products, special offers, and tips for natural skincare. We have a lot
+          planned for the future and we don't want you to miss it!
+        </p>
+        <form
+          class="flex w-full justify-center items-center flex-col gap-4"
+          method="POST"
+          enctype="multipart/form-data"
+          action="/email/send"
+        >
+          <input
+            type="email"
+            class="rounded text-center w-full sm:w-1/2 p-2 border border-amber-200 bg-amber-50 text-[#272b22]"
+            name="email"
+            id="emailInput"
+            required
+            placeholder="Enter your email"
+          />
+          <button
+            id="emailBtn"
+            type="submit"
+            class="w-full sm:w-1/2 p-4 border-2 border-amber-200 rounded px-8 transition hover:scale-105 leading-3 text-center text-2xl"
+          >
+            Subscribe
+          </button>
+        </form>
+      </div>
     </div>
   </section>
-  <footer class="bg-[#272b22] py-4 text-amber-50 text-center text-sm">
-    <p>
-      Crafted with 💖 by
-      <a href="https://mclark.dev" target="_blank">Michael Clark</a>
-      &copy; 2024
-    </p>
-  </footer>
 </Layout>
-
 <style>
   body {
     font-family: "Della Respira", serif;
@@ -258,7 +249,5 @@ let submitted = false;
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
-  emailBtn.addEventListener("click", (e: Event) => {
-    if (emailInput.value === "") e.preventDefault();
-  });
+  emailBtn.addEventListener("click", (e: Event) => {});
 </script>
