@@ -16,49 +16,41 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
   }
 
   // create unique ID for email
-  const emailEncoded = btoa(emailToAdd!.toString());
-  console.log({ emailEncoded });
+  const emailEncoded = btoa(emailToAdd.toString());
 
   // add ID:email key to Redis
-  const hsetResponse = await fetch(
-    import.meta.env.KV_REST_API_URL +
-      "/hset/" +
-      emailEncoded +
-      "/email/" +
-      emailToAdd,
+  const addEmailTransactionResponses: { result: number }[] = await fetch(
+    import.meta.env.KV_REST_API_URL + "/multi-exec",
     {
+      body: `[
+        ["HSET", "${emailEncoded}", "email", "${emailToAdd}"],
+        ["EXPIRE", "${emailEncoded}", "259200"]
+      ]`,
       headers: {
         Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
       },
+      method: "POST",
     }
   ).then((r) => r.json());
 
-  const expireResponse = await fetch(
-    import.meta.env.KV_REST_API_URL + "/expire/" + emailEncoded + "/259200/",
-    {
-      headers: {
-        Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
-      },
-    }
-  ).then((r) => r.json());
+  const shouldSendEmail = addEmailTransactionResponses.every(
+    (response) => response.result === 1
+  );
 
-  const userAdded = hsetResponse.result === 1 && expireResponse.result === 1;
-
-  if (userAdded) {
+  if (shouldSendEmail) {
     // create email template, add link to confirmation page with ID
     const confirmUrl =
       "https://clarksnaturalgoods.com/email/confirm?id=" +
       encodeURI(emailEncoded);
     const emailHTML = createConfirmationEmail({ confirmUrl });
 
-    console.log({ confirmUrl, decoded: atob(emailEncoded) });
-
     // send email confirmation to email
     const message = {
       to: emailToAdd,
       from: "michael@clarksnaturalgoods.com",
-      subject: "Please confirm your email address",
-      html: emailHTML,
+      subject:
+        "Hello from Clark's Natural Goods! Please confirm your email address",
+      html: `<a href="${confirmUrl}">Confirm your email address</a>`,
     };
 
     sendGrid
@@ -71,7 +63,6 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
   } else {
     return new Response(null, { status: 400 });
   }
-
   return new Response(null, {
     status: 204,
   });
