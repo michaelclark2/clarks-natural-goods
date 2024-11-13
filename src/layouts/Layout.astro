@@ -4,6 +4,7 @@ interface Props {
 }
 
 const { title } = Astro.props;
+import "@fontsource/della-respira";
 import "aos/dist/aos.css";
 ---
 
@@ -67,8 +68,10 @@ import "aos/dist/aos.css";
     <title>{title}</title>
   </head>
 
-  <body class="bg-amber-50">
-    <slot />
+  <body class="bg-amber-50 flex flex-col min-h-svh">
+    <main class="grow">
+      <slot />
+    </main>
     <footer class="bg-[#272b22] py-4 text-amber-50 text-center text-sm">
       <p>
         Crafted with 💖 by
@@ -82,16 +85,9 @@ import "aos/dist/aos.css";
     </script>
   </body>
 </html>
-<style is:global>
-  :root {
-    --accent: 136, 58, 234;
-    --accent-light: 224, 204, 250;
-    --accent-dark: 49, 10, 101;
-    --accent-gradient: linear-gradient(
-      45deg,
-      rgb(var(--accent)),
-      rgb(var(--accent-light)) 30%,
-      white 60%
-    );
+<style>
+  body {
+    font-family: "Della Respira", serif;
+    color: #272b22;
   }
 </style>

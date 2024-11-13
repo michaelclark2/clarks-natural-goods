@@ -1,0 +1,61 @@
+---
+import { createStorefrontApiClient } from "@shopify/storefront-api-client";
+import Layout from "../../../layouts/Layout.astro";
+import logo from "../../../assets/images/brand/logo words.svg";
+const shopify = createStorefrontApiClient({
+  storeDomain: "https://shop.clarksnaturalgoods.com",
+  apiVersion: "2024-10",
+  publicAccessToken: "4fd761a2fa1fc83cbc8a45c930c18a75",
+});
+
+const createCustomerMutation = `
+  mutation createCustomer($input: CustomerCreateInput!) {
+    customerCreate(input: $input) {
+      customer {
+        email
+        acceptsMarketing
+      }
+    }
+  }
+  `;
+// const { data, errors } = await shopify.request(createCustomerMutation, {
+//   variables: {
+//     input: {
+//       email: emailToAdd,
+//       password: "password",
+//       acceptsMarketing: true,
+//     },
+//   },
+// });
+// console.log(data, errors);
+const { id } = Astro.params;
+
+const emailDecoded = atob(decodeURI(id!));
+---
+
+<Layout title="Clark's Natural Goods | Thank You for Confirming Your Email">
+  <section
+    class="bg-[#272b22] h-48 text-amber-50 flex flex-col justify-center items-center px-4"
+  >
+    <h2 class="text-4xl lg:text-6xl text-center">You're All Set!</h2>
+  </section>
+  <section
+    class="text-2xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto lg:text-4xl flex flex-col justify-evenly items-center gap-8"
+  >
+    <p>
+      Your email address has been confirmed and you're ready to start getting
+      updates!
+    </p>
+    <p>
+      Thank you for joining us on our journey, we promise not to bug you too
+      much and will only update you at {emailDecoded} when we have important news
+      to share.
+    </p>
+    <a
+      href="https://shop.clarksnaturalgoods.com/products/body-soap"
+      class="p-4 bg-[#51910A] text-amber-50 border-2 border-emerald-700 rounded mx-auto px-8 transition hover:scale-105 text-xl w-full sm:w-1/2 text-center"
+    >
+      Shop Natural Skincare
+    </a>
+  </section>
+</Layout>

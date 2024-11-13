@@ -38,8 +38,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 
   if (shouldSendEmail) {
     const confirmUrl =
-      "https://clarksnaturalgoods.com/email/confirm?id=" +
-      encodeURI(emailEncoded);
+      "https://clarksnaturalgoods.com/email/confirm/" + encodeURI(emailEncoded);
     const emailHTML = createConfirmationEmail({ confirmUrl });
 
     const message = {

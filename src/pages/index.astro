@@ -1,17 +1,17 @@
 ---
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
-import "@fontsource/della-respira";
 
 import soapImage from "../assets/images/products/soap1.jpg";
 import soapImage2 from "../assets/images/products/soap2.jpg";
 import logo from "../assets/images/brand/logo words.svg";
 import Card from "../components/Card.astro";
-let submitted = false;
 ---
 
 <Layout title="Clark's Natural Goods">
-  <main class="p-10 pt-40 md:p-40 lg:p-40 min-h-svh relative overflow-hidden">
+  <section
+    class="p-10 pt-40 md:p-40 lg:p-40 min-h-svh relative overflow-hidden"
+  >
     <video
       id="bgVid"
       class="absolute top-0 left-0 object-cover min-h-full min-w-full opacity-75"
@@ -38,7 +38,7 @@ let submitted = false;
         Shop Natural Skincare
       </a>
     </div>
-  </main>
+  </section>
   <section
     class="bg-[#272b22] h-48 text-amber-50 flex justify-center items-center px-4"
   >
@@ -226,14 +226,6 @@ let submitted = false;
     </div>
   </section>
 </Layout>
-<style>
-  body {
-    font-family: "Della Respira", serif;
-    color: #272b22;
-  }
-  main {
-  }
-</style>
 
 <script>
   const emailForm = document.getElementById("emailForm")! as HTMLFormElement;
