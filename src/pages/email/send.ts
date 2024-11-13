@@ -15,17 +15,16 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
     });
   }
 
-  // create unique ID for email
   const emailEncoded = btoa(emailToAdd.toString());
 
-  // add ID:email key to Redis
   const addEmailTransactionResponses: { result: number }[] = await fetch(
     import.meta.env.KV_REST_API_URL + "/multi-exec",
     {
+      // expire in 3 days
       body: `[
         ["HSET", "${emailEncoded}", "email", "${emailToAdd}"],
         ["EXPIRE", "${emailEncoded}", "259200"]
-      ]`,
+        ]`,
       headers: {
         Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
       },
@@ -38,13 +37,11 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
   );
 
   if (shouldSendEmail) {
-    // create email template, add link to confirmation page with ID
     const confirmUrl =
       "https://clarksnaturalgoods.com/email/confirm?id=" +
       encodeURI(emailEncoded);
     const emailHTML = createConfirmationEmail({ confirmUrl });
 
-    // send email confirmation to email
     const message = {
       to: emailToAdd,
       from: "michael@clarksnaturalgoods.com",
