@@ -173,7 +173,7 @@ let submitted = false;
     </p>
     <a
       href="https://shop.clarksnaturalgoods.com/products/body-soap"
-      class="p-4 bg-[#51910A] text-amber-50 border-2 border-emerald-700 rounded mx-auto px-8 transition hover:scale-105 text-xl"
+      class="p-4 bg-[#51910A] text-amber-50 border-2 border-emerald-700 rounded mx-auto px-8 transition hover:scale-105 text-xl w-full sm:w-1/2 text-center"
     >
       Shop Natural Skincare
     </a>
@@ -191,13 +191,13 @@ let submitted = false;
     >
       <div
         id="thankYou"
-        class="text-[#272b22] text-base lg:text-2xl bg-amber-50 rounded border border-amber-200 shadow mx-auto p-12"
+        class="text-[#272b22] text-base lg:text-2xl bg-amber-50 rounded border border-amber-200 shadow mx-auto p-12 hidden"
       >
         <p class="text-center font-bold text-2xl lg:text-4xl">Thank you!</p>
         Thank you for subscribing!
       </div>
 
-      <div id="emailForm">
+      <div id="emailForm" class="flex flex-col gap-4">
         <p class="py-4">
           Sign up for our newsletter and be the first to know about new
           products, special offers, and tips for natural skincare. We have a lot
@@ -211,16 +211,15 @@ let submitted = false;
         >
           <input
             type="email"
-            class="rounded text-center w-full sm:w-1/2 p-2 border border-amber-200 bg-amber-50 text-[#272b22]"
+            class="rounded text-center w-full sm:w-1/2 p-4 border border-amber-200 bg-amber-50 text-[#272b22]"
             name="email"
             id="emailInput"
             required
             placeholder="Enter your email"
           />
           <button
-            id="emailBtn"
             type="submit"
-            class="w-full sm:w-1/2 p-4 border-2 border-amber-200 rounded px-8 transition hover:scale-105 leading-3 text-center text-2xl"
+            class="w-full sm:w-1/2 p-4 border-2 border-amber-200 rounded px-8 transition hover:scale-105 text-center text-2xl"
           >
             Subscribe
           </button>
@@ -239,8 +238,9 @@ let submitted = false;
 </style>
 
 <script>
+  const emailForm = document.getElementById("emailForm")! as HTMLFormElement;
+  const thankYou = document.getElementById("thankYou")! as HTMLElement;
   const emailInput = document.getElementById("emailInput")! as HTMLInputElement;
-  const emailBtn = document.getElementById("emailBtn")! as HTMLButtonElement;
   const jumpToTopBtn = document.getElementById(
     "jumpToTop"
   )! as HTMLButtonElement;
@@ -249,5 +249,9 @@ let submitted = false;
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
-  emailBtn.addEventListener("click", (e: Event) => {});
+  emailForm.addEventListener("submit", () => {
+    emailForm.classList.toggle("hidden");
+    thankYou.classList.toggle("hidden");
+    emailInput.value = "";
+  });
 </script>
