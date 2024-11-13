@@ -74,8 +74,10 @@ if (Astro.request.method === "POST") {
       loop
       preload="auto"></video>
     <div class="relative flex flex-col gap-24 md:gap-24">
-      <Image
-        src={logo}
+      <img
+        src={logo.src}
+        height={logo.height}
+        width={logo.width}
         alt="Clark's Natural Goods Logo"
         class:list={"text-center mx-auto drop-shadow"}
       />
