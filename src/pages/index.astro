@@ -197,17 +197,15 @@ let submitted = false;
         Thank you for subscribing!
       </div>
 
-      <div id="emailForm" class="flex flex-col gap-4">
+      <div id="formWrapper" class="flex flex-col gap-4">
         <p class="py-4">
           Sign up for our newsletter and be the first to know about new
           products, special offers, and tips for natural skincare. We have a lot
           planned for the future and we don't want you to miss it!
         </p>
         <form
+          id="emailForm"
           class="flex w-full justify-center items-center flex-col gap-4"
-          method="POST"
-          enctype="multipart/form-data"
-          action="/email/send"
         >
           <input
             type="email"
@@ -240,6 +238,7 @@ let submitted = false;
 <script>
   const emailForm = document.getElementById("emailForm")! as HTMLFormElement;
   const thankYou = document.getElementById("thankYou")! as HTMLElement;
+  const formWrapper = document.getElementById("formWrapper")! as HTMLElement;
   const emailInput = document.getElementById("emailInput")! as HTMLInputElement;
   const jumpToTopBtn = document.getElementById(
     "jumpToTop"
@@ -249,9 +248,13 @@ let submitted = false;
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
 
-  emailForm.addEventListener("submit", () => {
-    emailForm.classList.toggle("hidden");
+  emailForm.addEventListener("submit", (e: SubmitEvent) => {
+    e.preventDefault();
+    formWrapper.classList.toggle("hidden");
     thankYou.classList.toggle("hidden");
-    emailInput.value = "";
+    fetch("/email/send", {
+      method: "POST",
+      body: JSON.stringify({ email: emailInput.value }),
+    });
   });
 </script>

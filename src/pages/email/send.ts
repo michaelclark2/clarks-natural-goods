@@ -1,27 +1,13 @@
-import { createStorefrontApiClient } from "@shopify/storefront-api-client";
 import type { APIRoute } from "astro";
+import sendGrid from "@sendgrid/mail";
+sendGrid.setApiKey(import.meta.env.SENDGRID_API_KEY);
 
-const shopify = createStorefrontApiClient({
-  storeDomain: "https://shop.clarksnaturalgoods.com",
-  apiVersion: "2024-10",
-  publicAccessToken: "4fd761a2fa1fc83cbc8a45c930c18a75",
-});
-
-const createCustomerMutation = `
-mutation createCustomer($input: CustomerCreateInput!) {
-  customerCreate(input: $input) {
-    customer {
-      email
-      acceptsMarketing
-    }
-  }
-}
-`;
+import createConfirmationEmail from "../../assets/emails/newsletter-confirmation";
 
 export const POST: APIRoute = async ({ request }: { request: Request }) => {
-  const data = await request.formData();
+  const data = await request.json();
 
-  const emailToAdd = data.get("email");
+  const emailToAdd = data.email;
 
   if (!emailToAdd) {
     return new Response(null, {
@@ -56,22 +42,32 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
     }
   ).then((r) => r.json());
 
-  // create email template, add link to confirmation page with ID
-  // send email confirmation to email
-
   const userAdded = hsetResponse.result === 1 && expireResponse.result === 1;
 
   if (userAdded) {
-    const { data, errors } = await shopify.request(createCustomerMutation, {
-      variables: {
-        input: {
-          email: emailToAdd,
-          password: "password",
-          acceptsMarketing: true,
-        },
-      },
-    });
-    console.log(data, errors);
+    // create email template, add link to confirmation page with ID
+    const confirmUrl =
+      "https://clarksnaturalgoods.com/email/confirm?id=" +
+      encodeURI(emailEncoded);
+    const emailHTML = createConfirmationEmail({ confirmUrl });
+
+    console.log({ confirmUrl, decoded: atob(emailEncoded) });
+
+    // send email confirmation to email
+    const message = {
+      to: emailToAdd,
+      from: "michael@clarksnaturalgoods.com",
+      subject: "Please confirm your email address",
+      html: emailHTML,
+    };
+
+    sendGrid
+      .send(message)
+      .then((response) => {
+        console.log(response[0].statusCode);
+        console.log(response[0].headers);
+      })
+      .catch(console.error);
   } else {
     return new Response(null, { status: 400 });
   }
