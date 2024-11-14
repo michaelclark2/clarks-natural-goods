@@ -49,18 +49,18 @@ import Card from "../components/Card.astro";
   <section
     class="text-2xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto lg:text-4xl min-h-svh flex flex-col justify-evenly items-center gap-8"
   >
-    <p>
+    <p data-aos="fade-right">
       At <span class="font-bold">Clark's Natural Goods</span> we're dedicated to
       crafting handmade soap with simplicity and transparency. Each bar of soap is
       made with pure ingredients that contain no synthetics or additives, to nourish
       and support healthy, glowing skin.
     </p>
-    <p>
+    <p data-aos="fade-right">
       What started as a personal journey to find relief from eczema has
       transformed into a passion for creating gentle, handcrafted soap designed
       for all skin types.
     </p>
-    <p>
+    <p data-aos="fade-right">
       After years of refining our formula, we have developed a soap that is not
       only safe for sensitive skin but also enriched with nourishing properties,
       ensuring that each wash delivers a calming and soothing experience.
@@ -112,7 +112,7 @@ import Card from "../components/Card.astro";
         body="Enhances lather, giving the soap a rich, creamy texture while keeping skin moisturized."
       />
     </div>
-    <p class="mt-8">Scented with these therapeutic essential oils:</p>
+    <p class="mt-8">Scented with therapeutic essential oils</p>
     <div class="flex flex-wrap gap-4 text-base md:text-xl">
       <Card
         title="Tea Tree"
@@ -139,33 +139,41 @@ import Card from "../components/Card.astro";
     </h2>
   </section>
   <section
-    class="text-2xl lg:text-4xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto min-h-svh gap-8 flex-col flex justify-evenly items-center"
+    class="text-2xl lg:text-4xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto min-h-svh gap-24 flex-col flex justify-evenly items-center"
   >
     <Image
       class:list="aspect-square sm:aspect-auto object-cover"
       src={soapImage2}
       alt="Handmade soap resting on a field of grass"
     />
-    <p>
-      <h3 class="font-bold text-3xl lg:text-4xl">Crafted with Transparency</h3>
-      We believe you should know exactly what goes into your skincare. Our simple,
-      holistic recipes are made with ingredients you can trust.
-    </p>
-    <p>
-      <h3 class="font-bold text-3xl lg:text-4xl">
+    <div data-aos="fade-down">
+      <h3 class="font-bold text-3xl lg:text-4xl text-center mb-4">
+        Crafted with Transparency
+      </h3>
+      <p>
+        We believe you should know exactly what goes into your skincare. Our
+        simple, holistic recipes are made with ingredients you can trust.
+      </p>
+    </div>
+    <div data-aos="fade-down">
+      <h3 class="font-bold text-3xl lg:text-4xl text-center mb-4">
         A Commitment to You and the Planet
       </h3>
-      We are dedicated to creating products that are not only good for you, but are
-      good for the planet. We are committed to using zero synthetics and creating
-      as little waste as possible.
-    </p>
-    <p>
-      <h3 class="font-bold text-3xl lg:text-4xl">
+      <p>
+        We are dedicated to creating products that are not only good for you,
+        but are good for the planet. We are committed to using zero synthetics
+        and creating as little waste as possible.
+      </p>
+    </div>
+    <div data-aos="fade-down">
+      <h3 class="font-bold text-3xl lg:text-4xl text-center mb-4">
         For Sensitive Skin and Beyond
       </h3>
-      While created with sensitive skin in mind, our soap is for everyone. Enjoy
-      a soothing, calming cleanse that benefits all skin types.
-    </p>
+      <p>
+        While created with sensitive skin in mind, our soap is for everyone.
+        Enjoy a soothing, calming cleanse that benefits all skin types.
+      </p>
+    </div>
 
     <p class="font-bold text-3xl lg:text-4xl">
       Join us in embracing skincare that's gentle, effective, and made with
@@ -181,7 +189,7 @@ import Card from "../components/Card.astro";
   <section
     class="bg-[#272b22] h-48 text-amber-50 flex justify-center items-center px-4"
   >
-    <h2 class="text-4xl lg:text-6xl text-center">Want to know more?</h2>
+    <h2 class="text-4xl lg:text-6xl text-center">Want To Know More?</h2>
   </section>
   <section
     class="bg-[#272b22] text-amber-50 text-2xl lg:text-4xl pb-12 px-10 lg:px-48 xl:px-0 w-full flex-col flex justify-between items-center"
@@ -202,7 +210,7 @@ import Card from "../components/Card.astro";
         </p>
       </div>
 
-      <div id="formWrapper" class="flex flex-col gap-4">
+      <div id="formWrapper" class="flex flex-col gap-24">
         <p class="py-4">
           Sign up for our newsletter and be the first to know about new
           products, special offers, and tips for natural skincare. We have a lot

@@ -22,8 +22,8 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
     {
       // expire in 3 days
       body: `[
-        ["HSET", "${emailEncoded}", "email", "${emailToAdd}"],
-        ["EXPIRE", "${emailEncoded}", "259200"]
+          ["HSET", "${emailEncoded}", "email", "${emailToAdd}"],
+          ["EXPIRE", "${emailEncoded}", "259200"]
         ]`,
       headers: {
         Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
