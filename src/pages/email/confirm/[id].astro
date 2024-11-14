@@ -1,11 +1,11 @@
 ---
-import { createStorefrontApiClient } from "@shopify/storefront-api-client";
+import { createAdminApiClient } from "@shopify/admin-api-client";
 import Layout from "../../../layouts/Layout.astro";
 
-const shopify = createStorefrontApiClient({
+const shopify = createAdminApiClient({
   storeDomain: "https://shop.clarksnaturalgoods.com",
   apiVersion: "2024-10",
-  publicAccessToken: import.meta.env.SHOPIFY_PUBLIC_TOKEN,
+  accessToken: import.meta.env.SHOPIFY_ADMIN_API_TOKEN,
 });
 
 const createCustomerMutation = `
@@ -33,7 +33,6 @@ if (shouldAddEmailToShopify) {
     variables: {
       input: {
         email: emailDecoded,
-        password: "password",
         acceptsMarketing: true,
       },
     },
