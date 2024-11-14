@@ -5,7 +5,7 @@ import Layout from "../../../layouts/Layout.astro";
 const shopify = createStorefrontApiClient({
   storeDomain: "https://shop.clarksnaturalgoods.com",
   apiVersion: "2024-10",
-  publicAccessToken: "4fd761a2fa1fc83cbc8a45c930c18a75",
+  publicAccessToken: import.meta.env.SHOPIFY_PUBLIC_TOKEN,
 });
 
 const createCustomerMutation = `
