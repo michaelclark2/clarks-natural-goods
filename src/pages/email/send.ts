@@ -38,7 +38,8 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 
   if (shouldSendEmail) {
     const confirmUrl =
-      "https://clarksnaturalgoods.com/email/confirm/" + encodeURI(emailEncoded);
+      `https://${import.meta.env.VERCEL_ENV === "preview" ? import.meta.env.VERCEL_BRANCH_URL : import.meta.env.VERCEL_PROJECT_PRODUCTION_URL}/email/confirm/` +
+      encodeURI(emailEncoded);
     const emailHTML = createConfirmationEmail({ confirmUrl });
 
     const message = {
