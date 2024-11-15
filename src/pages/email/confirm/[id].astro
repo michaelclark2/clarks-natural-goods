@@ -1,5 +1,5 @@
 ---
-import sendGrid from "@sendgrid/mail";
+import sendGrid, { type MailDataRequired } from "@sendgrid/mail";
 
 import Layout from "../../../layouts/Layout.astro";
 
@@ -26,10 +26,16 @@ const shouldAddEmailToShopify = confirmEmailResponses.every(
 );
 
 if (shouldAddEmailToShopify) {
-  const message = {
+  const timestampInSeconds = Math.floor(
+    new Date(
+      new Date().getTime() + parseInt(import.meta.env.WELCOME_EMAIL_DELAY_MS)
+    ).getTime() / 1000
+  );
+  const message: MailDataRequired = {
     to: emailDecoded,
     from: import.meta.env.EMAIL_ADDRESS,
     templateId: "d-873294dda3aa43378f48be823c7a55ae",
+    sendAt: timestampInSeconds,
     dynamicTemplateData: {
       currentYear: new Date().getFullYear(),
     },
@@ -44,7 +50,10 @@ if (shouldAddEmailToShopify) {
       console.log(response[0].statusCode);
       console.log(response[0].headers);
     })
-    .catch(console.error);
+    .catch((err) => {
+      console.error(err);
+      console.error(err.response?.body.errors);
+    });
 }
 ---
 
