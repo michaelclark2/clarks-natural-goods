@@ -30,7 +30,9 @@ if (shouldAddEmailToShopify) {
     to: emailDecoded,
     from: import.meta.env.EMAIL_ADDRESS,
     templateId: "d-873294dda3aa43378f48be823c7a55ae",
-    dynamicTemplateData: {},
+    dynamicTemplateData: {
+      currentYear: new Date().getFullYear(),
+    },
     asm: {
       groupId: 25320,
     },
