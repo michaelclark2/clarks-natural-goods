@@ -46,6 +46,9 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
       dynamicTemplateData: {
         confirm_url: confirmUrl,
       },
+      asm: {
+        groupId: 25320,
+      },
     };
 
     await sendGrid
