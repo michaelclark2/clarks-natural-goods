@@ -55,7 +55,10 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
         console.log(response[0].statusCode);
         console.log(response[0].headers);
       })
-      .catch(console.error);
+      .catch((err) => {
+        console.error(err);
+        console.log(err);
+      });
   } else {
     return new Response(null, { status: 400 });
   }
