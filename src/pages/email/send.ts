@@ -49,7 +49,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
       },
     };
 
-    sendGrid
+    await sendGrid
       .send(message)
       .then((response) => {
         console.log(response[0].statusCode);
