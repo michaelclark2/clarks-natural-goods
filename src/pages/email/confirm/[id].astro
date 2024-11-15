@@ -1,5 +1,9 @@
 ---
+import sendGrid from "@sendgrid/mail";
+
 import Layout from "../../../layouts/Layout.astro";
+
+sendGrid.setApiKey(import.meta.env.SENDGRID_API_KEY);
 
 const { id } = Astro.params;
 
@@ -23,6 +27,17 @@ const shouldAddEmailToShopify = confirmEmailResponses.every(
 
 if (shouldAddEmailToShopify) {
   console.log("added to confirmed email list, send welcome email");
+  const message = {
+    to: emailDecoded,
+    from: import.meta.env.EMAIL_ADDRESS,
+    templateId: "d-873294dda3aa43378f48be823c7a55ae",
+    dynamicTemplateData: {},
+  };
+
+  sendGrid.send(message).then((response) => {
+    console.log(response[0].statusCode);
+    console.log(response[0].headers);
+  });
 }
 ---
 
