@@ -35,6 +35,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
   );
 
   if (shouldSendEmail) {
+    console.log("sending email");
     const confirmUrl =
       `${import.meta.env.VERCEL_ENV === "preview" ? import.meta.env.VERCEL_BRANCH_URL : import.meta.env.SITE}/email/confirm/` +
       encodeURI(emailEncoded);
