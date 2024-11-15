@@ -10,7 +10,7 @@ const confirmEmailResponses: { result: number }[] = await fetch(
   {
     body: `[
       ["HDEL", "${decodeURI(id!)}", "email"],
-      ["SADD", "${emailDecoded}", "confirmedEmails"]
+      ["SADD", "confirmedEmails","${emailDecoded}"]
     ]`,
     headers: { Authorization: `Bearer ${import.meta.env.KV_REST_API_TOKEN}` },
     method: "POST",
