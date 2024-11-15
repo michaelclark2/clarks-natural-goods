@@ -2,69 +2,20 @@
 import { Image } from "astro:assets";
 import Layout from "../layouts/Layout.astro";
 
-import { createStorefrontApiClient } from "@shopify/storefront-api-client";
-import "@fontsource/della-respira";
-
 import soapImage from "../assets/images/products/soap1.jpg";
 import soapImage2 from "../assets/images/products/soap2.jpg";
 import logo from "../assets/images/brand/logo words.svg";
 import Card from "../components/Card.astro";
-
-let submitted = false;
-
-const shopify = createStorefrontApiClient({
-  storeDomain: "https://shop.clarksnaturalgoods.com",
-  apiVersion: "2024-10",
-  publicAccessToken: import.meta.env.SHOPIFY_PUBLIC_TOKEN,
-});
-
-const createCustomerMutation = `
-mutation createCustomer($input: CustomerCreateInput!) {
-  customerCreate(input: $input) {
-    customer {
-      email
-      acceptsMarketing
-    }
-  }
-}
-`;
-
-if (Astro.request.method === "POST") {
-  try {
-    const data = await Astro.request.formData();
-    const emailToAdd = data.get("email");
-    if (emailToAdd) {
-      const { result } = await fetch(
-        import.meta.env.KV_REST_API_URL + "/sadd/emails/" + emailToAdd,
-        {
-          headers: {
-            Authorization: "Bearer " + import.meta.env.KV_REST_API_TOKEN,
-          },
-        }
-      ).then((r) => r.json());
-      if (result === 1) {
-        const { data, errors } = await shopify.request(createCustomerMutation, {
-          variables: {
-            input: {
-              email: emailToAdd,
-              password: "password",
-              acceptsMarketing: true,
-            },
-          },
-        });
-        console.log(data, errors);
-      }
-
-      submitted = true;
-    }
-  } catch (error) {
-    console.error(error);
-  }
-}
 ---
 
 <Layout title="Clark's Natural Goods">
-  <main class="p-10 pt-40 md:p-40 lg:p-40 min-h-svh relative overflow-hidden">
+  <script
+    type="text/javascript"
+    src={`https://www.google.com/recaptcha/api.js?render=${import.meta.env.RECAPTCHA_SITE_KEY}`}
+  ></script>
+  <section
+    class="p-10 pt-40 md:p-40 lg:p-40 min-h-svh relative overflow-hidden"
+  >
     <video
       id="bgVid"
       class="absolute top-0 left-0 object-cover min-h-full min-w-full opacity-75"
@@ -91,7 +42,7 @@ if (Astro.request.method === "POST") {
         Shop Natural Skincare
       </a>
     </div>
-  </main>
+  </section>
   <section
     class="bg-[#272b22] h-48 text-amber-50 flex justify-center items-center px-4"
   >
@@ -100,20 +51,20 @@ if (Astro.request.method === "POST") {
     </h1>
   </section>
   <section
-    class="text-2xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto lg:text-4xl min-h-svh flex flex-col justify-evenly items-center gap-8"
+    class="text-2xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto lg:text-4xl min-h-svh flex flex-col justify-evenly items-center gap-24 sm:gap-8"
   >
-    <p>
+    <p data-aos="fade-right">
       At <span class="font-bold">Clark's Natural Goods</span> we're dedicated to
       crafting handmade soap with simplicity and transparency. Each bar of soap is
       made with pure ingredients that contain no synthetics or additives, to nourish
       and support healthy, glowing skin.
     </p>
-    <p>
+    <p data-aos="fade-right">
       What started as a personal journey to find relief from eczema has
       transformed into a passion for creating gentle, handcrafted soap designed
       for all skin types.
     </p>
-    <p>
+    <p data-aos="fade-right">
       After years of refining our formula, we have developed a soap that is not
       only safe for sensitive skin but also enriched with nourishing properties,
       ensuring that each wash delivers a calming and soothing experience.
@@ -127,7 +78,7 @@ if (Astro.request.method === "POST") {
     </h2>
   </section>
   <section
-    class="text-2xl lg:text-4xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto min-h-svh gap-8 flex-col flex justify-evenly items-start"
+    class="text-2xl lg:text-4xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto min-h-svh gap-24 flex-col flex justify-evenly items-start"
   >
     <Image
       class:list="aspect-square sm:aspect-auto object-cover"
@@ -165,7 +116,7 @@ if (Astro.request.method === "POST") {
         body="Enhances lather, giving the soap a rich, creamy texture while keeping skin moisturized."
       />
     </div>
-    <p class="mt-8">Scented with these therapeutic essential oils:</p>
+    <p class="mt-8">Scented with therapeutic essential oils</p>
     <div class="flex flex-wrap gap-4 text-base md:text-xl">
       <Card
         title="Tea Tree"
@@ -192,33 +143,41 @@ if (Astro.request.method === "POST") {
     </h2>
   </section>
   <section
-    class="text-2xl lg:text-4xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto min-h-svh gap-8 flex-col flex justify-evenly items-center"
+    class="text-2xl lg:text-4xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto min-h-svh gap-24 flex-col flex justify-evenly items-center"
   >
     <Image
       class:list="aspect-square sm:aspect-auto object-cover"
       src={soapImage2}
       alt="Handmade soap resting on a field of grass"
     />
-    <p>
-      <h3 class="font-bold text-3xl lg:text-4xl">Crafted with Transparency</h3>
-      We believe you should know exactly what goes into your skincare. Our simple,
-      holistic recipes are made with ingredients you can trust.
-    </p>
-    <p>
-      <h3 class="font-bold text-3xl lg:text-4xl">
+    <div data-aos="fade-down">
+      <h3 class="font-bold text-3xl lg:text-4xl text-center mb-4">
+        Crafted with Transparency
+      </h3>
+      <p>
+        We believe you should know exactly what goes into your skincare. Our
+        simple, holistic recipes are made with ingredients you can trust.
+      </p>
+    </div>
+    <div data-aos="fade-down">
+      <h3 class="font-bold text-3xl lg:text-4xl text-center mb-4">
         A Commitment to You and the Planet
       </h3>
-      We are dedicated to creating products that are not only good for you, but are
-      good for the planet. We are committed to using zero synthetics and creating
-      as little waste as possible.
-    </p>
-    <p>
-      <h3 class="font-bold text-3xl lg:text-4xl">
+      <p>
+        We are dedicated to creating products that are not only good for you,
+        but are good for the planet. We are committed to using zero synthetics
+        and creating as little waste as possible.
+      </p>
+    </div>
+    <div data-aos="fade-down">
+      <h3 class="font-bold text-3xl lg:text-4xl text-center mb-4">
         For Sensitive Skin and Beyond
       </h3>
-      While created with sensitive skin in mind, our soap is for everyone. Enjoy
-      a soothing, calming cleanse that benefits all skin types.
-    </p>
+      <p>
+        While created with sensitive skin in mind, our soap is for everyone.
+        Enjoy a soothing, calming cleanse that benefits all skin types.
+      </p>
+    </div>
 
     <p class="font-bold text-3xl lg:text-4xl">
       Join us in embracing skincare that's gentle, effective, and made with
@@ -226,7 +185,7 @@ if (Astro.request.method === "POST") {
     </p>
     <a
       href="https://shop.clarksnaturalgoods.com/products/body-soap"
-      class="p-4 bg-[#51910A] text-amber-50 border-2 border-emerald-700 rounded mx-auto px-8 transition hover:scale-105 text-xl"
+      class="p-4 bg-[#51910A] text-amber-50 border-2 border-emerald-700 rounded mx-auto px-8 transition hover:scale-105 text-xl w-full sm:w-1/2 text-center"
     >
       Shop Natural Skincare
     </a>
@@ -234,7 +193,7 @@ if (Astro.request.method === "POST") {
   <section
     class="bg-[#272b22] h-48 text-amber-50 flex justify-center items-center px-4"
   >
-    <h2 class="text-4xl lg:text-6xl text-center">Want to know more?</h2>
+    <h2 class="text-4xl lg:text-6xl text-center">Want To Know More?</h2>
   </section>
   <section
     class="bg-[#272b22] text-amber-50 text-2xl lg:text-4xl pb-12 px-10 lg:px-48 xl:px-0 w-full flex-col flex justify-between items-center"
@@ -242,75 +201,79 @@ if (Astro.request.method === "POST") {
     <div
       class="xl:w-[50%] mx-auto flex flex-col justify-between items-center gap-8"
     >
-      {
-        submitted ? (
-          <div class="text-[#272b22] text-base lg:text-2xl bg-amber-50 rounded border border-amber-200 shadow mx-auto p-12">
-            <p class="text-center font-bold text-2xl lg:text-4xl">Thank you!</p>
-            Thank you for subscribing!
-          </div>
-        ) : (
-          <>
-            <p class="py-4">
-              Sign up for our newsletter and be the first to know about new
-              products, special offers, and tips for natural skincare. We have a
-              lot planned for the future and we don't want you to miss it!
-            </p>
-            <form
-              class="flex w-full justify-center items-center flex-col gap-4"
-              method="POST"
-              enctype="multipart/form-data"
-            >
-              <input
-                type="email"
-                class="rounded text-center w-full sm:w-1/2 p-2 border border-amber-200 bg-amber-50 text-[#272b22]"
-                name="email"
-                id="emailInput"
-                required
-                placeholder="Enter your email"
-              />
-              <button
-                id="emailBtn"
-                type="submit"
-                class="w-full sm:w-1/2 p-4 border-2 border-amber-200 rounded px-8 transition hover:scale-105 leading-3 text-center text-2xl"
-              >
-                Subscribe
-              </button>
-            </form>
-          </>
-        )
-      }
+      <div
+        id="thankYou"
+        class="text-[#272b22] text-base lg:text-2xl bg-amber-50 rounded border border-amber-200 shadow mx-auto p-12 hidden"
+      >
+        <p class="text-center font-bold text-2xl lg:text-4xl mb-4">
+          Thank You!
+        </p>
+        <p>
+          Please check your inbox for a link to confirm your email address so
+          you don't miss any updates!
+        </p>
+      </div>
+
+      <div id="formWrapper" class="flex flex-col gap-24">
+        <p class="py-4">
+          Sign up for our newsletter and be the first to know about new
+          products, special offers, and tips for natural skincare. We have a lot
+          planned for the future and we don't want you to miss it!
+        </p>
+        <form
+          id="emailForm"
+          class="flex w-full justify-center items-center flex-col gap-4"
+        >
+          <input
+            type="email"
+            class="rounded text-center w-full sm:w-1/2 p-4 border border-amber-200 bg-amber-50 text-[#272b22]"
+            name="email"
+            id="emailInput"
+            required
+            placeholder="Enter your email"
+          />
+          <button
+            type="submit"
+            class="w-full sm:w-1/2 p-4 border-2 border-amber-200 rounded px-8 transition hover:scale-105 text-center text-2xl"
+          >
+            Subscribe
+          </button>
+          <script
+            is:inline
+            define:vars={{ siteKey: import.meta.env.RECAPTCHA_SITE_KEY }}
+          >
+            const emailForm = document.getElementById("emailForm");
+            const thankYou = document.getElementById("thankYou");
+            const formWrapper = document.getElementById("formWrapper");
+            const emailInput = document.getElementById("emailInput");
+
+            emailForm.addEventListener("submit", (e) => {
+              e.preventDefault();
+              grecaptcha.ready(function () {
+                grecaptcha
+                  .execute(siteKey, { action: "submit" })
+                  .then(async (token) => {
+                    const response = await fetch("/api/recaptcha", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({ token }),
+                    });
+                    if (response.ok) {
+                      formWrapper.classList.toggle("hidden");
+                      thankYou.classList.toggle("hidden");
+                      await fetch("/api/email/send", {
+                        method: "POST",
+                        body: JSON.stringify({ email: emailInput.value }),
+                      });
+                    }
+                  });
+              });
+            });
+          </script>
+        </form>
+      </div>
     </div>
   </section>
-  <footer class="bg-[#272b22] py-4 text-amber-50 text-center text-sm">
-    <p>
-      Crafted with 💖 by
-      <a href="https://mclark.dev" target="_blank">Michael Clark</a>
-      &copy; 2024
-    </p>
-  </footer>
 </Layout>
-
-<style>
-  body {
-    font-family: "Della Respira", serif;
-    color: #272b22;
-  }
-  main {
-  }
-</style>
-
-<script>
-  const emailInput = document.getElementById("emailInput")! as HTMLInputElement;
-  const emailBtn = document.getElementById("emailBtn")! as HTMLButtonElement;
-  const jumpToTopBtn = document.getElementById(
-    "jumpToTop"
-  )! as HTMLButtonElement;
-
-  jumpToTopBtn?.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  emailBtn.addEventListener("click", (e: Event) => {
-    if (emailInput.value === "") e.preventDefault();
-  });
-</script>
