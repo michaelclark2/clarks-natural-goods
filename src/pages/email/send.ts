@@ -2,8 +2,6 @@ import type { APIRoute } from "astro";
 import sendGrid from "@sendgrid/mail";
 sendGrid.setApiKey(import.meta.env.SENDGRID_API_KEY);
 
-import createConfirmationEmail from "../../assets/emails/newsletter-confirmation";
-
 export const POST: APIRoute = async ({ request }: { request: Request }) => {
   const data = await request.json();
 
@@ -38,16 +36,16 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
 
   if (shouldSendEmail) {
     const confirmUrl =
-      `https://${import.meta.env.VERCEL_ENV === "preview" ? import.meta.env.VERCEL_BRANCH_URL : import.meta.env.VERCEL_PROJECT_PRODUCTION_URL}/email/confirm/` +
+      `${import.meta.env.VERCEL_ENV === "preview" ? import.meta.env.VERCEL_BRANCH_URL : import.meta.env.SITE}/email/confirm/` +
       encodeURI(emailEncoded);
-    const emailHTML = createConfirmationEmail({ confirmUrl });
 
     const message = {
       to: emailToAdd,
-      from: "michael@clarksnaturalgoods.com",
-      subject:
-        "Hello from Clark's Natural Goods! Please confirm your email address",
-      html: `<a href="${confirmUrl}">Confirm your email address</a>`,
+      from: import.meta.env.EMAIL_ADDRESS,
+      templateId: "d-33ed46c01674433683c6b767cfe0e087",
+      dynamicTemplateData: {
+        confirm_url: confirmUrl,
+      },
     };
 
     sendGrid

@@ -1,43 +1,28 @@
 ---
-import { createAdminApiClient } from "@shopify/admin-api-client";
 import Layout from "../../../layouts/Layout.astro";
 
-const shopify = createAdminApiClient({
-  storeDomain: "https://shop.clarksnaturalgoods.com",
-  apiVersion: "2024-10",
-  accessToken: import.meta.env.SHOPIFY_ADMIN_API_TOKEN,
-});
-
-const createCustomerMutation = `
-  mutation createCustomer($input: CustomerCreateInput!) {
-    customerCreate(input: $input) {
-      customer {
-        email
-        acceptsMarketing
-      }
-    }
-  }
-  `;
 const { id } = Astro.params;
 
 const emailDecoded = atob(decodeURI(id!));
 
-const deleteEmailResponse: { result: number } = await fetch(
-  import.meta.env.KV_REST_API_URL + "/hdel/" + decodeURI(id!) + "/email",
-  { headers: { Authorization: `Bearer ${import.meta.env.KV_REST_API_TOKEN}` } }
+const confirmEmailResponses: { result: number }[] = await fetch(
+  import.meta.env.KV_REST_API_URL + "/multi-exec",
+  {
+    body: `[
+      ["HDEL", "${decodeURI(id!)}", "email"],
+      ["SADD", "${emailDecoded}", "confirmedEmails"]
+    ]`,
+    headers: { Authorization: `Bearer ${import.meta.env.KV_REST_API_TOKEN}` },
+    method: "POST",
+  }
 ).then((r) => r.json());
-const shouldAddEmailToShopify = deleteEmailResponse.result === 1;
+
+const shouldAddEmailToShopify = confirmEmailResponses.every(
+  (response) => response.result === 1
+);
 
 if (shouldAddEmailToShopify) {
-  const { data, errors } = await shopify.request(createCustomerMutation, {
-    variables: {
-      input: {
-        email: emailDecoded,
-        acceptsMarketing: true,
-      },
-    },
-  });
-  console.log(data, errors);
+  console.log("added to confirmed email list, send welcome email");
 }
 ---
 
