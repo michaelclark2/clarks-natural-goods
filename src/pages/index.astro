@@ -9,6 +9,10 @@ import Card from "../components/Card.astro";
 ---
 
 <Layout title="Clark's Natural Goods">
+  <script
+    type="text/javascript"
+    src={`https://www.google.com/recaptcha/api.js?render=${import.meta.env.RECAPTCHA_SITE_KEY}`}
+  ></script>
   <section
     class="p-10 pt-40 md:p-40 lg:p-40 min-h-svh relative overflow-hidden"
   >
@@ -234,32 +238,42 @@ import Card from "../components/Card.astro";
           >
             Subscribe
           </button>
+          <script
+            is:inline
+            define:vars={{ siteKey: import.meta.env.RECAPTCHA_SITE_KEY }}
+          >
+            const emailForm = document.getElementById("emailForm");
+            const thankYou = document.getElementById("thankYou");
+            const formWrapper = document.getElementById("formWrapper");
+            const emailInput = document.getElementById("emailInput");
+
+            emailForm.addEventListener("submit", (e) => {
+              e.preventDefault();
+              grecaptcha.ready(function () {
+                grecaptcha
+                  .execute(siteKey, { action: "submit" })
+                  .then(async (token) => {
+                    const response = await fetch("/api/recaptcha", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({ token }),
+                    });
+                    if (response.ok) {
+                      formWrapper.classList.toggle("hidden");
+                      thankYou.classList.toggle("hidden");
+                      fetch("/email/send", {
+                        method: "POST",
+                        body: JSON.stringify({ email: emailInput.value }),
+                      });
+                    }
+                  });
+              });
+            });
+          </script>
         </form>
       </div>
     </div>
   </section>
 </Layout>
-
-<script>
-  const emailForm = document.getElementById("emailForm")! as HTMLFormElement;
-  const thankYou = document.getElementById("thankYou")! as HTMLElement;
-  const formWrapper = document.getElementById("formWrapper")! as HTMLElement;
-  const emailInput = document.getElementById("emailInput")! as HTMLInputElement;
-  const jumpToTopBtn = document.getElementById(
-    "jumpToTop"
-  )! as HTMLButtonElement;
-
-  jumpToTopBtn?.addEventListener("click", () => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-
-  emailForm.addEventListener("submit", (e: SubmitEvent) => {
-    e.preventDefault();
-    formWrapper.classList.toggle("hidden");
-    thankYou.classList.toggle("hidden");
-    fetch("/email/send", {
-      method: "POST",
-      body: JSON.stringify({ email: emailInput.value }),
-    });
-  });
-</script>
