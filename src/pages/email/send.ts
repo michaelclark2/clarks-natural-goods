@@ -35,7 +35,6 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
   );
 
   if (shouldSendEmail) {
-    console.log("sending email");
     const confirmUrl =
       `${import.meta.env.VERCEL_ENV === "preview" ? import.meta.env.VERCEL_BRANCH_URL : import.meta.env.SITE}/email/confirm/` +
       encodeURI(emailEncoded);
@@ -55,10 +54,7 @@ export const POST: APIRoute = async ({ request }: { request: Request }) => {
         console.log(response[0].statusCode);
         console.log(response[0].headers);
       })
-      .catch((err) => {
-        console.error(err);
-        console.log(err);
-      });
+      .catch(console.error);
   } else {
     return new Response(null, { status: 400 });
   }
