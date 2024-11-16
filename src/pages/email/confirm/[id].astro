@@ -10,6 +10,7 @@ const { id } = Astro.params;
 const emailDecoded = atob(decodeURI(id!));
 
 const isValidEmail = emailDecoded.match(/^\S+@\S+\.\S+$/);
+
 if (isValidEmail) {
   const confirmEmailResponses: { result: number }[] = await fetch(
     import.meta.env.KV_REST_API_URL + "/multi-exec",
