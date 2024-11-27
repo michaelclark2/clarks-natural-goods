@@ -7,6 +7,7 @@ import {
   CarouselPrevious,
   type CarouselApi,
 } from "./ui/carousel";
+
 const testimonials = [
   {
     name: "Dan W.",
@@ -18,7 +19,9 @@ const testimonials = [
     state: "TX",
     body: "Everything arrived in perfect condition. I really love the formula you use and it smells so freaking good!!  I will definitely be ordering it again. ❤️❤️",
   },
+  { name: "Michael C.", state: "TN", body: "It smells good" },
 ];
+
 export default function Testimonials() {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
@@ -36,7 +39,7 @@ export default function Testimonials() {
     });
   }, [api]);
   return (
-    <Carousel setApi={setApi} className="max-w-[100%]">
+    <Carousel setApi={setApi} opts={{ loop: true }} className="max-w-[100%]">
       <CarouselContent>
         {testimonials.map(
           (t: { name: string; state: string; body: string }, index: number) => (
