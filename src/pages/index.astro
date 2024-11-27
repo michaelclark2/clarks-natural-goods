@@ -6,7 +6,7 @@ import soapImage from "../assets/images/products/soap1.jpg";
 import soapImage2 from "../assets/images/products/soap2.jpg";
 import logo from "../assets/images/brand/logo words.svg";
 import Card from "../components/Card.astro";
-import Testimonials from "../components/Testimonials.astro";
+import Testimonials from "../components/Testimonials.tsx";
 ---
 
 <Layout title="Clark's Natural Goods">
@@ -147,7 +147,7 @@ import Testimonials from "../components/Testimonials.astro";
   <section
     class="text-2xl lg:text-4xl py-24 px-10 lg:px-48 xl:px-0 xl:w-[50%] xl:max-w-[1024px] mx-auto min-h-svh gap-24 flex-col flex justify-evenly items-center"
   >
-    <Testimonials />
+    <Testimonials client:load />
   </section>
   <section
     class="bg-[#272b22] h-48 text-amber-50 flex justify-center items-center px-4"
